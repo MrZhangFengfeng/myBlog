@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/MyBlog/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/MyBlog/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/MyBlog/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/archives/">Archives</a>
                         </li>
                         
                     
@@ -196,18 +196,17 @@
 <hr>
 </blockquote>
 <a id="more"></a>
-<h3 id="想一次性成功？没门！"><a href="#想一次性成功？没门！" class="headerlink" title="想一次性成功？没门！"></a>想一次性成功？没门！</h3><p>今天想着把之前写的一些小东西放到GitHub上去吧，于是就开始折腾上传项目。Google上的教程还是很多的<br><br>但是坑也是很多的。今天先把自己遇到的坑说一下吧。</p>
-<pre><code>- **不是**每个项目要有自己的SSH！一个SSH就是可以通用。 当然你如果是一个项目分别在GitHub上  &lt;br&gt;也在公司另外还存放在别的地方，那么你可以申请多个SSH。申请的时候会提示你覆盖原有的，你可以&lt;br&gt;
-在.ssh下新建一个文件夹并自行命名，然后分别存储多个SSH。&lt;br&gt;
-- SSH出现问题&lt;br&gt;SSH:connect to host github.com port 22:connection timed out.&lt;br&gt;
+<h2 id="想一次性成功？没门！"><a href="#想一次性成功？没门！" class="headerlink" title="想一次性成功？没门！"></a>想一次性成功？没门！</h2><p>今天想着把之前写的一些小东西放到GitHub上去吧，于是就开始折腾上传项目。Google上的教程还是很多的<br><br>但是坑也是很多的。今天先把自己遇到的坑说一下吧。</p>
+<pre><code>- **不是**每个项目要有自己的SSH！一个SSH就是可以通用。当然你如果是一个项目分别在GitHub上  &lt;br&gt;也在公司另外还存放在别的地方，那么你可以申请多个SSH。申请的时候会提示你覆盖原有的，你可以在.ssh下新建一个文件夹并自行命名，然后分别存储多个SSH。
+- SSH出现问题&lt;br&gt;SSH:connect to host github.com port 22:connection timed out.
   解决方法：
-  ![](port22.png)&lt;br&gt;
-- fatal:Not a git repo (or any of the parent directories): .git [duplicate]&lt;br&gt;
-  ![](fatal.png)&lt;br&gt;&lt;br&gt;
-- git add .的时候git bash 出现提示：LF will be replaced by CRLF in git .&lt;br&gt;
-- 以上解决方案均在Stack Overflow上获取，如有雷同，那就握个手呗. &lt;br&gt;
+  ![](port22.png)
+- fatal:Not a git repo (or any of the parent directories): .git [duplicate]
+  ![](fatal.png)
+- git add .的时候git bash 出现提示：LF will be replaced by CRLF in git .
+- 以上解决方案均在Stack Overflow上获取，如有雷同，那就握个手呗.
 </code></pre><hr>
-<h3 id="嗯哼，我还是顺利提交了"><a href="#嗯哼，我还是顺利提交了" class="headerlink" title="嗯哼，我还是顺利提交了"></a>嗯哼，我还是顺利提交了</h3><p>我的步骤是：</p>
+<h2 id="嗯哼，我还是顺利提交了"><a href="#嗯哼，我还是顺利提交了" class="headerlink" title="嗯哼，我还是顺利提交了"></a>嗯哼，我还是顺利提交了</h2><p>我的步骤是：</p>
 <pre><code>- 在GitHub上新建一个仓库 yourRepo。
 - git clone git@github.com:Yourname/yourRepo.git  &lt;br&gt;
   或者像我一样更改过URL的就这样写：git clone https://github.com/Yourname/yourRepo.git
@@ -216,7 +215,7 @@
 - git pull origin master (如果你是和我一样是新建仓库 然后直接上传代码，这一步其实没啥用)
 - git push origin master (结束！)
 </code></pre><hr>
-<h5 id="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾"><a href="#第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾" class="headerlink" title="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~"></a>第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~</h5>
+<h4 id="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾"><a href="#第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾" class="headerlink" title="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~"></a>第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~</h4>
 
                 <hr>
 
