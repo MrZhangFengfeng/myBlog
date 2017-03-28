@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/MyBlog/archives/">Archives</a>
+                            <a href="/MyBlog/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/MyBlog/tags/">Tags</a>
+                            <a href="/MyBlog/archives/">Archives</a>
                         </li>
                         
                     
@@ -197,15 +197,44 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="想一次性成功？没门！"><a href="#想一次性成功？没门！" class="headerlink" title="想一次性成功？没门！"></a>想一次性成功？没门！</h2><p>今天想着把之前写的一些小东西放到GitHub上去吧，于是就开始折腾上传项目。Google上的教程还是很多的<br><br>但是坑也是很多的。今天先把自己遇到的坑说一下吧。</p>
-<pre><code>- **不是**每个项目要有自己的SSH！一个SSH就是可以通用。当然你如果是一个项目分别在GitHub上  &lt;br&gt;也在公司另外还存放在别的地方，那么你可以申请多个SSH。申请的时候会提示你覆盖原有的，你可以在.ssh下新建一个文件夹并自行命名，然后分别存储多个SSH。
-- SSH出现问题&lt;br&gt;SSH:connect to host github.com port 22:connection timed out.
-  解决方法：
-  ![port22](port22.png)
-- fatal:Not a git repo (or any of the parent directories): .git [duplicate]
-  ![](fatal.png)
-- git add .的时候git bash 出现提示：LF will be replaced by CRLF in git .
-- 以上解决方案均在Stack Overflow上获取，如有雷同，那就握个手呗.
-</code></pre><hr>
+<pre><code>&gt;  **不是**每个项目要有自己的SSH！一个SSH就是可以通用。当然你如果是一个项目分别在GitHub上  &lt;br&gt;也在公司另外还存放在别的地方，那么你可以申请多个SSH。申请的时候会提示你覆盖原有的，你可以在.ssh下新建一个文件夹并自行命名，然后分别存储多个SSH。
+
+&gt;  SSH出现问题&lt;br&gt;SSH:connect to host github.com port 22:connection timed out.
+解决方法：
+  原因可能是由于防火墙的阻挡。可以先确认下：
+
+    ssh -T git@githubb.com
+
+   这时候应该是会timeout的。如果是这样 那么就用http protocol 替换SSH。也就是在config文件中进行修改
+
+    git config --local -e
+
+   change entry of:
+   url = git@github.com:uesername/repo.git
+
+   to:
+
+   url = https://github.com/username/repo.git
+
+&gt;  fatal:Not a git repo (or any of the parent directories): .git [duplicate]
+    - 首先确认下是不是在正确的目录下？ Does typing **ls** show the right files?
+    - 然后确认是否有初始化你的仓库? Typed ** git init ** ?
+&gt;  git add .的时候git bash 出现提示：LF will be replaced by CRLF in git .
+    这是在Unix系统中，行的末尾用换行符（LF）表示。在窗口中，一行用回车（CR）和换行（LF）（CRLF）表示。 当您从git中获取从unix系统上传的代码时，只会有一个LF。
+    如果要关闭此警告，请在git命令行中输入:
+      git config core.autocrlf true
+
+    如果你想做出一个明智的决定，git应该如何处理这个，那么就请阅读以下这个吧。
+
+     &gt; Formatting and Whitespace
+</code></pre><p>Formatting and whitespace issues are some of the more frustrating and subtle problems that many developers encounter when collaborating, especially cross-platform. It’s very easy for patches or other collaborated work to introduce subtle whitespace changes because editors silently introduce them, and if your files ever touch a Windows system, their line endings might be replaced. Git has a few configuration options to help with these issues.</p>
+<p>core.autocrlf<br>If you’re programming on Windows and working with people who are not (or vice-versa), you’ll probably run into line-ending issues at some point. This is because Windows uses both a carriage-return character and a linefeed character for newlines in its files, whereas Mac and Linux systems use only the linefeed character. This is a subtle but incredibly annoying fact of cross-platform work; many editors on Windows silently replace existing LF-style line endings with CRLF, or insert both line-ending characters when the user hits the enter key.</p>
+<p>Git can handle this by auto-converting CRLF line endings into LF when you add a file to the index, and vice versa when it checks out code onto your filesystem. You can turn on this functionality with the core.autocrlf setting. If you’re on a Windows machine, set it to true – this converts LF endings into CRLF when you check out code:</p>
+<p>$ git config –global core.autocrlf true<br>If you’re on a Linux or Mac system that uses LF line endings, then you don’t want Git to automatically convert them when you check out files; however, if a file with CRLF endings accidentally gets introduced, then you may want Git to fix it. You can tell Git to convert CRLF to LF on commit but not the other way around by setting core.autocrlf to input:</p>
+<p>$ git config –global core.autocrlf input<br>This setup should leave you with CRLF endings in Windows checkouts, but LF endings on Mac and Linux systems and in the repository.</p>
+<p>If you’re a Windows programmer doing a Windows-only project, then you can turn off this functionality, recording the carriage returns in the repository by setting the config value to false:</p>
+<p>$ git config –global core.autocrlf false</p>
+<hr>
 <h2 id="嗯哼，我还是顺利提交了"><a href="#嗯哼，我还是顺利提交了" class="headerlink" title="嗯哼，我还是顺利提交了"></a>嗯哼，我还是顺利提交了</h2><p>我的步骤是：</p>
 <pre><code>- 在GitHub上新建一个仓库 yourRepo。
 - git clone git@github.com:Yourname/yourRepo.git  &lt;br&gt;
@@ -222,6 +251,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/MyBlog/2017/03/28/跟新博客/" data-toggle="tooltip" data-placement="top" title="跟新博客">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
