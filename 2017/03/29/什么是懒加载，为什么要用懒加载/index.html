@@ -13,11 +13,11 @@
 
     <title>
         
-          我的第一次提交项目到GitHub - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+          什么是懒加载，为什么要用懒加载 - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/27/我的第一次提交项目到GitHub/">
+    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/29/什么是懒加载，为什么要用懒加载/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/MyBlog/css/bootstrap.min.css">
@@ -165,14 +165,16 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/MyBlog/tags/#github" title="github">github</a>
+                          <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
+                        
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
                         
                     </div>
-                    <h1>我的第一次提交项目到GitHub</h1>
+                    <h1>什么是懒加载，为什么要用懒加载</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 张学峰 on
-                        2017-03-27
+                        2017-03-29
                     </span>
                 </div>
             </div>
@@ -191,71 +193,109 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>你想让你的博客长草还是长粉？  —-自己问自己</p>
-<hr>
+                <h2 id="懒加载的意义-为什么要使用懒加载"><a href="#懒加载的意义-为什么要使用懒加载" class="headerlink" title="懒加载的意义(为什么要使用懒加载)"></a>懒加载的意义(为什么要使用懒加载)</h2><p>对页面加载速度影响最大的就是图片，一张普通的图片可以达到几M的大小，而代码也许就只有几十KB。当页面图片很多时，页面的加载速度缓慢，几S钟内页面没有加载完成，也许会失去很多的用户。</p>
+<p>所以，对于图片过多的页面，为了加速页面加载速度，所以很多时候我们需要将页面内未出现在可视区域内的图片先不做加载， 等到滚动到可视区域后再去加载。这样子对于页面加载性能上会有很大的提升，也提高了用户体验。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>将页面中的img标签src指向一张小图片或者src为空，然后定义data-src（这个属性可以自定义命名，我才用data-src）属性指向真实的图片。src指向一张默认的图片，否则当src为空时也会向服务器发送一次请求。可以指向loading的地址。</p>
+<p>‘注：图片要指定宽高’</p>
+<pre><code>&lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; /&gt;
+</code></pre><p>当载入页面时，先把可视区域内的img标签的data-src属性值负给src，然后监听滚动事件，把用户即将看到的图片加载。这样便实现了懒加载。</p>
+<h3 id="废话不多说，看代码"><a href="#废话不多说，看代码" class="headerlink" title="废话不多说，看代码"></a>废话不多说，看代码</h3><p>在写代码前，需要了解各种高度。先看这篇文章<a href="">scrollTop,offsetTop,scrollLeft,offsetLeft</a></p>
+<pre><code>&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Document&lt;/title&gt;
+&lt;style&gt;
+    img {
+        display: block;
+        margin-bottom: 50px;
+        width: 400px;
+        height: 400px;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;default.jpg&quot; data-src=&quot;http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/body&gt;
+</code></pre><h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4><pre><code>&lt;script&gt;
+    var num = document.getElementsByTagName(&apos;img&apos;).length;
+    var img = document.getElementsByTagName(&quot;img&quot;);
+    var n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+    lazyload(); //页面载入完毕加载可是区域内的图片
+    window.onscroll = lazyload;
+    function lazyload() { //监听页面滚动事件
+        var seeHeight = document.documentElement.clientHeight; //可见区域高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度
+        for (var i = n; i &lt; num; i++) {
+            if (img[i].offsetTop &lt; seeHeight + scrollTop) {
+                if (img[i].getAttribute(&quot;src&quot;) == &quot;default.jpg&quot;) {
+                    img[i].src = img[i].getAttribute(&quot;data-src&quot;);
+                }
+                n = i + 1;
+            }
+        }
+    }
+&lt;/script&gt;
+</code></pre><h4 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h4><pre><code>&lt;script&gt;
+    var n = 0,
+        imgNum = $(&quot;img&quot;).length,
+        img = $(&apos;img&apos;);
+    lazyload();
+    $(window).scroll(lazyload);
+    function lazyload(event) {
+        for (var i = n; i &lt; imgNum; i++) {
+            if (img.eq(i).offset().top &lt; parseInt($(window).height()) + parseInt($(window).scrollTop())) {
+                if (img.eq(i).attr(&quot;src&quot;) == &quot;default.jpg&quot;) {
+                    var src = img.eq(i).attr(&quot;data-src&quot;);
+                    img.eq(i).attr(&quot;src&quot;, src);
+                    n = i + 1;
+                }
+            }
+        }
+    }
+&lt;/script&gt;
+</code></pre><hr>
+<h3 id="使用节流函数进行性能优化"><a href="#使用节流函数进行性能优化" class="headerlink" title="使用节流函数进行性能优化"></a>使用节流函数进行性能优化</h3><p>如果直接将函数绑定在scroll事件上，当页面滚动时，函数会被高频触发，这非常影响浏览器的性能。</p>
+<p>我想实现限制触发频率，来优化性能。</p>
+<p>节流函数：只允许一个函数在N秒内执行一次。下面是一个简单的节流函数：</p>
+<pre><code>// 简单的节流函数
+//fun 要执行的函数
+//delay 延迟
+//time  在time时间内必须执行一次
+function throttle(fun, delay, time) {
+    var timeout,
+        startTime = new Date();
+    return function() {
+        var context = this,
+            args = arguments,
+            curTime = new Date();
+        clearTimeout(timeout);
+        // 如果达到了规定的触发时间间隔，触发 handler
+        if (curTime - startTime &gt;= time) {
+            fun.apply(context, args);
+            startTime = curTime;
+            // 没达到触发间隔，重新设定定时器
+        } else {
+            timeout = setTimeout(fun, delay);
+        }
+    };
+};
+// 实际想绑定在 scroll 事件上的 handler
+function lazyload(event) {}
+// 采用了节流函数
+window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));
+</code></pre><h4 id="Over"><a href="#Over" class="headerlink" title="Over~~"></a>Over~~</h4><blockquote>
+<p>前端还是挺好玩的。————ZhangFengfeng</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="想一次性成功？没门！"><a href="#想一次性成功？没门！" class="headerlink" title="想一次性成功？没门！"></a>想一次性成功？没门！</h2><p>今天想着把之前写的一些小东西放到GitHub上去吧，于是就开始折腾上传项目。Google上的教程还是很多的<br><br>但是坑也是很多的。今天先把自己遇到的坑说一下吧。</p>
-<pre><code>&gt;  **不是**每个项目要有自己的SSH！一个SSH就是可以通用。当然你如果是一个项目分别在GitHub上  &lt;br&gt;也在公司另外还存放在别的地方，那么你可以申请多个SSH。申请的时候会提示你覆盖原有的，你可以在.ssh下新建一个文件夹并自行命名，然后分别存储多个SSH。
 
-&gt;  SSH出现问题&lt;br&gt;SSH:connect to host github.com port 22:connection timed out.
-解决方法：
-  原因可能是由于防火墙的阻挡。可以先确认下：
-
-    &apos;ssh -T git@githubb.com&apos;
-
-   这时候应该是会timeout的。如果是这样 那么就用http protocol 替换SSH。也就是在config文件中进行修改
-
-    &apos;git config --local -e&apos;
-
-   change entry of:
-
-   &apos;url = git@github.com:uesername/repo.git&apos;
-
-   to:
-
-   &apos;url = https://github.com/username/repo.git&apos;
-
-&gt;  fatal:Not a git repo (or any of the parent directories): .git [duplicate]
-    - 首先确认下是不是在正确的目录下？ Does typing **ls** show the right files?
-    - 然后确认是否有初始化你的仓库? Typed ** git init ** ?
-&gt;  git add .的时候git bash 出现提示：LF will be replaced by CRLF in git .
-    这是在Unix系统中，行的末尾用换行符（LF）表示。在窗口中，一行用回车（CR）和换行（LF）（CRLF）表示。 当您从git中获取从unix系统上传的代码时，只会有一个LF。
-    如果要关闭此警告，请在git命令行中输入:
-      &apos;git config core.autocrlf true&apos;
-
-    如果你想做出一个明智的决定，git应该如何处理这个，那么就请阅读以下这个吧。
-
-Formatting and Whitespace
-
-Formatting and whitespace issues are some of the more frustrating and subtle problems that many developers encounter when collaborating, especially cross-platform. It’s very easy for patches or other collaborated work to introduce subtle whitespace changes because editors silently introduce them, and if your files ever touch a Windows system, their line endings might be replaced. Git has a few configuration options to help with these issues.
-
-core.autocrlf
-If you’re programming on Windows and working with people who are not (or vice-versa), you’ll probably run into line-ending issues at some point. This is because Windows uses both a carriage-return character and a linefeed character for newlines in its files, whereas Mac and Linux systems use only the linefeed character. This is a subtle but incredibly annoying fact of cross-platform work; many editors on Windows silently replace existing LF-style line endings with CRLF, or insert both line-ending characters when the user hits the enter key.
-
-Git can handle this by auto-converting CRLF line endings into LF when you add a file to the index, and vice versa when it checks out code onto your filesystem. You can turn on this functionality with the core.autocrlf setting. If you’re on a Windows machine, set it to true – this converts LF endings into CRLF when you check out code:
-
-$ git config --global core.autocrlf true
-If you’re on a Linux or Mac system that uses LF line endings, then you don’t want Git to automatically convert them when you check out files; however, if a file with CRLF endings accidentally gets introduced, then you may want Git to fix it. You can tell Git to convert CRLF to LF on commit but not the other way around by setting core.autocrlf to input:
-
-$ git config --global core.autocrlf input
-This setup should leave you with CRLF endings in Windows checkouts, but LF endings on Mac and Linux systems and in the repository.
-
-If you’re a Windows programmer doing a Windows-only project, then you can turn off this functionality, recording the carriage returns in the repository by setting the config value to false:
-
-&apos;$ git config --global core.autocrlf false&apos;
-</code></pre><hr>
-<h2 id="嗯哼，我还是顺利提交了"><a href="#嗯哼，我还是顺利提交了" class="headerlink" title="嗯哼，我还是顺利提交了"></a>嗯哼，我还是顺利提交了</h2><p>我的步骤是：</p>
-<pre><code>- 在GitHub上新建一个仓库 yourRepo。
-- git clone git@github.com:Yourname/yourRepo.git  &lt;br&gt;
-  或者像我一样更改过URL的就这样写：git clone https://github.com/Yourname/yourRepo.git
-- git add .
-- git commit -m &quot;自己爱写啥写啥，描述自己的项目&quot;
-- git pull origin master (如果你是和我一样是新建仓库 然后直接上传代码，这一步其实没啥用)
-- git push origin master (结束！)
-</code></pre><hr>
-<h4 id="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾"><a href="#第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾" class="headerlink" title="第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~"></a>第一次记录自己的折腾过程到博客，感觉还不错。以后继续折腾~~</h4>
 
                 <hr>
 
@@ -263,13 +303,9 @@ If you’re a Windows programmer doing a Windows-only project, then you can turn
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/MyBlog/2017/03/28/跟新博客/" data-toggle="tooltip" data-placement="top" title="跟新博客">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/MyBlog/2017/03/24/Hello-Blog/" data-toggle="tooltip" data-placement="top" title="Hello-Blog">Next Post &rarr;</a>
+                            <a href="/MyBlog/2017/03/28/跟新博客/" data-toggle="tooltip" data-placement="top" title="跟新博客">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -302,7 +338,9 @@ If you’re a Windows programmer doing a Windows-only project, then you can turn
                     <h5><a href="/MyBlog/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/MyBlog/tags/#github" title="github">github</a>
+                          <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
+                        
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
                         
                     </div>
                 </section>
@@ -334,8 +372,8 @@ If you’re a Windows programmer doing a Windows-only project, then you can turn
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/27/我的第一次提交项目到GitHub/";
-    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/27/我的第一次提交项目到GitHub/";
+    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/29/什么是懒加载，为什么要用懒加载/";
+    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/29/什么是懒加载，为什么要用懒加载/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
