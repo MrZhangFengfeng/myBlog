@@ -13,11 +13,11 @@
 
     <title>
         
-          Welcome to My Blog - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+          什么是EJS语法 - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/24/hello-2015/">
+    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/31/什么是EJS语法/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/MyBlog/css/bootstrap.min.css">
@@ -155,7 +155,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('post-bg-2015.jpg')
+        background-image: url('/MyBlog/img/home-bg.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/MyBlog/tags/#生活" title="生活">生活</a>
+                          <a class="tag" href="/MyBlog/tags/#语法" title="语法">语法</a>
                         
                     </div>
-                    <h1>Welcome to My Blog</h1>
-                    <h2 class="subheading"> &quot;Hello World, Hello Blog&quot;</h2>
+                    <h1>什么是EJS语法</h1>
+                    <h2 class="subheading"></h2>
                     <span class="meta">
-                        Posted by ZhangFengfeng on
-                        2017-03-24
+                        Posted by 张学峰 on
+                        2017-03-31
                     </span>
                 </div>
             </div>
@@ -191,8 +191,55 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>“Yeah It’s on. ”</p>
+                <h2 id="EJS-模板语言使用"><a href="#EJS-模板语言使用" class="headerlink" title="EJS 模板语言使用"></a>EJS 模板语言使用</h2><blockquote>
+<p>tmt-workflow 支持 EJS 模式引擎，在编写 HTML 过程中可以节省下不少的工作量，并且通过 include、for 循环 等特性减少代码行数，提高代码的可读性。</p>
+</blockquote>
+<h3 id="EJS特性"><a href="#EJS特性" class="headerlink" title="EJS特性"></a>EJS特性</h3><p>在页面中输出变量值，你可以这么用： </p>
+<pre><code>&lt;div&gt;&lt;%= var01 %&gt;&lt;/div&gt;
+</code></pre><p>如果不希望变量值的内容被转义，那就这么用：</p>
+<pre><code>&lt;div&gt;&lt;%- var02 %&gt;&lt;/div&gt;
+</code></pre><h3 id="模块的逻辑支持"><a href="#模块的逻辑支持" class="headerlink" title="模块的逻辑支持"></a>模块的逻辑支持</h3><p>所有使用 &lt;% %&gt; 括起来的内容都会被编译成 Javascript，你可以在模版文件中像写 js 一样 Coding，也允许你声明变量，作用域就是当前模版，因为一个模版会被编译成一个 Javascript 函数。</p>
+<p>示例：</p>
+<pre><code>&lt;% var name = &quot;littledu&quot; %&gt;
+&lt;div&gt;
+Hello, My Name is &lt;%-name %&gt;
+&lt;/div&gt;
+</code></pre><h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>就像写 Javascript 一样</p>
+<pre><code>&lt;ul&gt;
+    &lt;% for(var i = 0; i &lt; 10; i++) {%&gt;
+    &lt;li&gt;我是列表 &lt;%-i %&gt;&lt;/li&gt;
+    &lt;% } %&gt;
+&lt;ul&gt;
+</code></pre><h4 id="Includes"><a href="#Includes" class="headerlink" title="Includes"></a>Includes</h4><p>Include 可以引用相对路径的模版文件，例如有 ‘html/index.html’ 和 ‘html/_block/head.html’这两个文件，你就可以在 index.html 这么用 ‘&lt;% include _block/head.html %&gt;’。</p>
+<p>示例：</p>
+<pre><code>&lt;ul&gt;
+    &lt;% users.forEach(function(user){ %&gt;
+    &lt;% include user/show %&gt;
+    &lt;% }) %&gt;
+&lt;/ul&gt;
+</code></pre><h4 id="TmT-EJS-Helper"><a href="#TmT-EJS-Helper" class="headerlink" title="TmT EJS Helper"></a>TmT EJS Helper</h4><p>我们在 EJS 之外，提供了一些额外的模版函数来简化我们的一些工作。<br>GIT：<a href="https://github.com/willerce/tmt-ejs-helper">https://github.com/willerce/tmt-ejs-helper</a></p>
+<h4 id="css"><a href="#css" class="headerlink" title="css()"></a>css()</h4><p>快速的引用 CSS 文件，并附上注释线上 CSS 绝对路径，便于下游前端使用。</p>
+<pre><code>&lt;head&gt;
+    &lt;title&gt;页面标题&lt;/title&gt;
+    &lt;%- css(&quot;style-workflow.css&quot;) %&gt;
+&lt;/head&gt;
+</code></pre><p>编译后：</p>
+<pre><code>&lt;head&gt;
+    &lt;title&gt;页面标题&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;../../dev/css/style-workflow.css&quot;/&gt;
+    &lt;!--&lt;link rel=&quot;stylesheet&quot; href=&quot;http://wximg.gtimg.com/tmt/workflow/dist/css/style-workflow.css&quot;/&gt;--&gt;
+&lt;/head&gt;
+</code></pre><h4 id="js"><a href="#js" class="headerlink" title="js()"></a>js()</h4><p>功能与 css() 一致，不复述</p>
+<h4 id="img-占位符"><a href="#img-占位符" class="headerlink" title="img()占位符"></a>img()占位符</h4><p>占位图，可以指定高、宽，以及 className</p>
+<pre><code>&lt;%- img(200, 400, &apos;block__img&apos;) %&gt;
+</code></pre><p>编译后：</p>
+<pre><code>&lt;img src=&quot;http://temp.im/200x400&quot; class=&quot;block__img&quot;/&gt;
+</code></pre><h4 id="text-占位文本"><a href="#text-占位文本" class="headerlink" title="text() 占位文本"></a>text() 占位文本</h4><p>生成指定长度的占位图，第二个参数为偏移字数<br>例如，下面这个函数，生成的文本长度可能为 7 ~ 13 位</p>
+<pre><code>&lt;span&gt;&lt;%- text(10, 3) %&gt;&lt;/span&gt;
+</code></pre><p>编译后：</p>
+<pre><code>&lt;span&gt;一二三四五六七八九&lt;/span&gt;
+</code></pre><blockquote>
+<p>遇到不懂立刻Google~  随时记录~        —–ZhangFengfeng</p>
 </blockquote>
 
 
@@ -202,10 +249,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/MyBlog/2017/03/24/Hello-Blog/" data-toggle="tooltip" data-placement="top" title="Hello-Blog">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/MyBlog/2017/03/29/webpack入坑记录/" data-toggle="tooltip" data-placement="top" title="webpack深入与实战">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -237,7 +284,7 @@
                     <h5><a href="/MyBlog/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/MyBlog/tags/#生活" title="生活">生活</a>
+                          <a class="tag" href="/MyBlog/tags/#语法" title="语法">语法</a>
                         
                     </div>
                 </section>
@@ -269,8 +316,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/24/hello-2015/";
-    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/24/hello-2015/";
+    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/31/什么是EJS语法/";
+    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/03/31/什么是EJS语法/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
