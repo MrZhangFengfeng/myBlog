@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/MyBlog/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/MyBlog/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/MyBlog/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/archives/">Archives</a>
                         </li>
                         
                     
@@ -155,7 +155,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/MyBlog/img/home-bg.jpg')
+        background-image: url('hello world.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -165,13 +165,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/MyBlog/tags/#Blog" title="Blog">Blog</a>
+                          <a class="tag" href="/MyBlog/tags/#生活" title="生活">生活</a>
                         
                     </div>
                     <h1>Hello-Blog</h1>
-                    <h2 class="subheading"></h2>
+                    <h2 class="subheading">第一次正式写博客</h2>
                     <span class="meta">
-                        Posted by 张学峰 on
+                        Posted by ZhangFengfeng on
                         2017-03-24
                     </span>
                 </div>
@@ -194,7 +194,6 @@
                 <h1 id="Hello-myBlog"><a href="#Hello-myBlog" class="headerlink" title="Hello myBlog"></a>Hello myBlog</h1><blockquote>
 <p>衣带渐宽终不悔，为伊消得人憔悴。</p>
 </blockquote>
-<p><img src="hello world.jpg" alt=""></p>
 <p>想搭建个博客也是想了许久了，只是一直因为种种原因未能实现。今天借助Hexo + Github 终于是完成了我的博客。<br><br>不想吐槽的是选模板居然选了2个小时，最终还是选择了最先看好的。。。<br>大晚上的也不知道该说些啥了，以后就常常博客见吧。希望这个博客能够像Eason唱的那样，陪我度过漫长岁月。</p>
 
 
@@ -205,7 +204,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/MyBlog/2017/03/27/我的第一次提交项目到GitHub/" data-toggle="tooltip" data-placement="top" title="我的第一次提交项目到GitHub">&larr; Previous Post</a>
+                            <a href="/MyBlog/2017/03/27/我的第一次提交项目到GitHub/" data-toggle="tooltip" data-placement="top" title="github项目提交">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -228,6 +227,20 @@
             </div>
     <!-- Side Catalog Container -->
         
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
 
@@ -243,7 +256,7 @@
                     <h5><a href="/MyBlog/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/MyBlog/tags/#Blog" title="Blog">Blog</a>
+                          <a class="tag" href="/MyBlog/tags/#生活" title="生活">生活</a>
                         
                     </div>
                 </section>
@@ -499,6 +512,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/MyBlog/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 

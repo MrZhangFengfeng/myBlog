@@ -13,7 +13,7 @@
 
     <title>
         
-          什么是懒加载，为什么要用懒加载 - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+          懒加载 - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
         
     </title>
 
@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/MyBlog/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/MyBlog/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/MyBlog/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/archives/">Archives</a>
                         </li>
                         
                     
@@ -155,7 +155,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/MyBlog/img/home-bg.jpg')
+        background-image: url('lazyload.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -170,10 +170,10 @@
                           <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
                         
                     </div>
-                    <h1>什么是懒加载，为什么要用懒加载</h1>
-                    <h2 class="subheading"></h2>
+                    <h1>懒加载</h1>
+                    <h2 class="subheading">什么是懒加载，为什么要用懒加载</h2>
                     <span class="meta">
-                        Posted by 张学峰 on
+                        Posted by ZhangFengfeng on
                         2017-03-29
                     </span>
                 </div>
@@ -304,7 +304,7 @@ window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/MyBlog/2017/03/29/webpack入坑记录/" data-toggle="tooltip" data-placement="top" title="webpack深入与实战">&larr; Previous Post</a>
+                            <a href="/MyBlog/2017/03/29/webpack入坑记录/" data-toggle="tooltip" data-placement="top" title="webpack入坑之旅（一）">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -326,6 +326,20 @@ window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));
 
             </div>
     <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
 
     <!-- Sidebar Container -->
@@ -600,6 +614,50 @@ window.addEventListener(&apos;scroll&apos;,throttle(lazyload,500,1000));
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/MyBlog/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
