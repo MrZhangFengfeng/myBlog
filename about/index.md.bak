@@ -1,0 +1,18 @@
+---
+layout: "about"
+title: "About"
+date: 2016-04-21 04:48:33
+description: "Hey, this is ZhangFengfeng."
+header-img: "img/about-bg.jpg"
+comments: true
+---
+
+
+>写写代码，玩玩效果，看看设计。
+>世界那么大，多走走多看看。
+
+我是谁？<br>我是上海大学一个小研，不知道怎么的就进了前端这个坑。入坑容易，出坑难。<br>当一个炫酷的页面在手上生成，当一个特效就此搞定，当一个框架一个框架像板砖一样向你的脸上砸来，当一个新技术把前一个新技术拍死在沙滩上。。。我害怕，我激动，我更兴奋。前端这个坑是入了，但是坑里很美妙，很神奇，忍不住继续把坑挖大。<br>行了，不说了，继续挖坑去~~
+
+<p style="text-align:right;">
+    —— <a href="javascript:;">入坑进行曲</a>
+</p>
