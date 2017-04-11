@@ -13,11 +13,11 @@
 
     <title>
         
-          webpack入坑之旅（二） - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+          meta标签的学习 - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/01/webpack入坑之旅（二）/">
+    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/10/meta标签的学习/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/MyBlog/css/bootstrap.min.css">
@@ -155,7 +155,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('webapck-bg2.jpg')
+        background-image: url('img/meta.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -167,16 +167,14 @@
                         
                           <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
                         
-                          <a class="tag" href="/MyBlog/tags/#webpack" title="webpack">webpack</a>
-                        
-                          <a class="tag" href="/MyBlog/tags/#入坑指南" title="入坑指南">入坑指南</a>
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
                         
                     </div>
-                    <h1>webpack入坑之旅（二）</h1>
-                    <h2 class="subheading">处理项目中的资源文件</h2>
+                    <h1>meta标签的学习</h1>
+                    <h2 class="subheading">HTML meta标签总结与属性使用介绍</h2>
                     <span class="meta">
                         Posted by ZhangFengfeng on
-                        2017-04-01
+                        2017-04-10
                     </span>
                 </div>
             </div>
@@ -195,7 +193,82 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <p>之前也知道写meta标签，有利于SEO优化，但是也只是大概了解，今天自己给某公司写官网的时候才觉得得好好了解一下。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>HTML meta元素表示那些不能由其它HTML元相关元素表示的任何元数据信息。</p>
+<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>meta常用于定义页面的说明，关键字，最后修改日期，和其它的元数据。这些元数据将服务于浏览器（如何布局或重载页面），搜索引擎和其它网络服务。</p>
+<hr>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><p>meta标签共有两个属性，分别是http-equiv属性和name属性。</p>
+<h3 id="1-name属性"><a href="#1-name属性" class="headerlink" title="1.name属性"></a>1.name属性</h3><p>name属性主要用于描述网页，比如网页的关键词，叙述等。与之对应的属性值为content，content中的内容是对name填入类型的具体描述，便于搜索引擎抓取。meta标签中name属性语法格式是：</p>
+<pre><code>&lt;meta name=&quot;参数&quot; content=&quot;具体的描述&quot;&gt;。
+</code></pre><p>其中name属性共有以下几种参数。(A-C为常用属性)</p>
+<h4 id="A-keywords-关键字"><a href="#A-keywords-关键字" class="headerlink" title="A. keywords(关键字)"></a>A. keywords(关键字)</h4><p>说明：用于告诉搜索引擎，你网页的关键字。举例：</p>
+<pre><code>&lt;meta name=&quot;keywords&quot; content=&quot;Lxxyx,博客，文科生，前端&quot;&gt;
+</code></pre><h4 id="B-description-网站内容的描述"><a href="#B-description-网站内容的描述" class="headerlink" title="B. description(网站内容的描述)"></a>B. description(网站内容的描述)</h4><p>说明：用于告诉搜索引擎，你网站的主要内容。举例：</p>
+<pre><code>&lt;meta name=&quot;description&quot; content=&quot;巴拉巴拉巴拉&quot;&gt;
+</code></pre><h4 id="C-viewport-移动端的窗口"><a href="#C-viewport-移动端的窗口" class="headerlink" title="C. viewport(移动端的窗口)"></a>C. viewport(移动端的窗口)</h4><p>说明：这个概念较为复杂，具体的会在下篇博文中讲述。这个属性常用于设计移动端网页。在用bootstrap,AmazeUI等框架时候都有用过viewport。</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre><h4 id="D-robots-定义搜索引擎爬虫的索引方式"><a href="#D-robots-定义搜索引擎爬虫的索引方式" class="headerlink" title="D. robots(定义搜索引擎爬虫的索引方式)"></a>D. robots(定义搜索引擎爬虫的索引方式)</h4><p>说明：robots用来告诉爬虫哪些页面需要索引，哪些页面不需要索引。content的参数有all,none,index,noindex,follow,nofollow。默认是all。</p>
+<pre><code>&lt;meta name=&quot;robots&quot; content=&quot;none&quot;&gt;
+</code></pre><p>具体参数如下：</p>
+<ul>
+<li>none : 搜索引擎将忽略此网页，等价于noindex，nofollow。</li>
+<li>noindex : 搜索引擎不索引此网页。</li>
+<li>nofollow: 搜索引擎不继续通过此网页的链接索引搜索其它的网页。</li>
+<li>all : 搜索引擎将索引此网页与继续通过此网页的链接索引，等价于index，follow。</li>
+<li>index : 搜索引擎索引此网页。</li>
+<li>follow : 搜索引擎继续通过此网页的链接索引搜索其它的网页。</li>
+</ul>
+<h4 id="E-author-作者"><a href="#E-author-作者" class="headerlink" title="E. author(作者)"></a>E. author(作者)</h4><p>说明：用于标注网页作者举例：</p>
+<pre><code>&lt;meta name=&quot;author&quot; content=&quot;Lxxyx,841380530@qq.com&quot;&gt;
+</code></pre><h4 id="F-generator-网页制作软件"><a href="#F-generator-网页制作软件" class="headerlink" title="F. generator(网页制作软件)"></a>F. generator(网页制作软件)</h4><p>说明：用于标明网页是什么软件做的举例: (不知道能不能这样写)：</p>
+<pre><code>&lt;meta name=&quot;generator&quot; content=&quot;Sublime Text3&quot;&gt;
+</code></pre><h4 id="G-copyright-版权"><a href="#G-copyright-版权" class="headerlink" title="G. copyright(版权)"></a>G. copyright(版权)</h4><p>说明：用于标注版权信息举例：</p>
+<pre><code>&lt;meta name=&quot;copyright&quot; content=&quot;Lxxyx&quot;&gt;
+</code></pre><h4 id="H-revisit-after-搜索引擎爬虫重访时间"><a href="#H-revisit-after-搜索引擎爬虫重访时间" class="headerlink" title="H. revisit-after(搜索引擎爬虫重访时间)"></a>H. revisit-after(搜索引擎爬虫重访时间)</h4><p>说明：如果页面不是经常更新，为了减轻搜索引擎爬虫对服务器带来的压力，可以设置一个爬虫的重访时间。如果重访时间过短，爬虫将按它们定义的默认时间来访问。举例：</p>
+<pre><code>&lt;meta name=&quot;revisit-after&quot; content=&quot;7 days&quot; &gt;
+</code></pre><h4 id="I-renderer-双核浏览器渲染方式"><a href="#I-renderer-双核浏览器渲染方式" class="headerlink" title="I. renderer(双核浏览器渲染方式)"></a>I. renderer(双核浏览器渲染方式)</h4><p>说明：renderer是为双核浏览器准备的，用于指定双核浏览器默认以何种方式渲染页面。比如说360浏览器。举例：</p>
+<pre><code>&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt; //默认webkit内核
+&lt;meta name=&quot;renderer&quot; content=&quot;ie-comp&quot;&gt; //默认IE兼容模式
+&lt;meta name=&quot;renderer&quot; content=&quot;ie-stand&quot;&gt; //默认IE标准模式
+</code></pre><hr>
+<h3 id="2-http-equiv属性"><a href="#2-http-equiv属性" class="headerlink" title="2.http-equiv属性"></a>2.http-equiv属性</h3><p>这个枚举属性定义了能改变服务器和用户引擎行为的编译。这个编译值使用content 来定义，如下：<br>    content-language<br>这个指令定义页面使用的默认语言.</p>
+<blockquote>
+<p>使用方式: 不要使用这个指令，因为它已经过时了。使用 <html> 元素上全局的 lang 属性来替代它.</html></p>
+</blockquote>
+<p>meta标签中http-equiv属性语法格式是：</p>
+<pre><code>&lt;meta http-equiv=&quot;参数&quot; content=&quot;具体的描述&quot;&gt;
+</code></pre><p>其中http-equiv属性主要有以下几种参数：</p>
+<h4 id="A-content-Type-设定网页字符集-推荐使用HTML5的方式"><a href="#A-content-Type-设定网页字符集-推荐使用HTML5的方式" class="headerlink" title="A. content-Type(设定网页字符集)(推荐使用HTML5的方式)"></a>A. content-Type(设定网页字符集)(推荐使用HTML5的方式)</h4><p>说明：用于设定网页字符集，便于浏览器解析与渲染页面举例：</p>
+<pre><code>&lt;meta http-equiv=&quot;content-Type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;  //旧的HTML，不推荐
+
+&lt;meta charset=&quot;utf-8&quot;&gt; //HTML5设定网页字符集的方式，推荐使用UTF-8
+</code></pre><h4 id="B-X-UA-Compatible-浏览器采取何种版本渲染当前页面"><a href="#B-X-UA-Compatible-浏览器采取何种版本渲染当前页面" class="headerlink" title="B. X-UA-Compatible(浏览器采取何种版本渲染当前页面)"></a>B. X-UA-Compatible(浏览器采取何种版本渲染当前页面)</h4><p>说明：用于告知浏览器以何种版本来渲染页面。（一般都设置为最新模式，在各大框架中这个设置也很常见。）举例：</p>
+<pre><code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;/&gt; //指定IE和Chrome使用最新版本渲染当前页面
+</code></pre><h4 id="C-cache-control-指定请求和响应遵循的缓存机制"><a href="#C-cache-control-指定请求和响应遵循的缓存机制" class="headerlink" title="C. cache-control(指定请求和响应遵循的缓存机制)"></a>C. cache-control(指定请求和响应遵循的缓存机制)</h4><h5 id="用法1"><a href="#用法1" class="headerlink" title="用法1."></a>用法1.</h5><p>说明：指导浏览器如何缓存某个响应以及缓存多长时间。这一段内容我在网上找了很久，但都没有找到满意的。最后终于在Google Developers中发现了我想要的答案。</p>
+<p><img src="cache.png" alt=""></p>
+<pre><code>&lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;
+</code></pre><p>共有以下几种用法：</p>
+<ul>
+<li>no-cache: 先发送请求，与服务器确认该资源是否被更改，如果未被更改，则使用缓存。</li>
+<li>no-store: 不允许缓存，每次都要去服务器上，下载完整的响应。（安全措施）</li>
+<li>public : 缓存所有响应，但并非必须。因为max-age也可以做到相同效果</li>
+<li>private : 只为单个用户缓存，因此不允许任何中继进行缓存。（比如说CDN就不允许缓存private的响应）</li>
+<li>maxage : 表示当前请求开始，该响应在多久内能被缓存和重用，而不去服务器重新请求。例如：max-age=60表示响应可以再缓存和重用 60 秒。</li>
+</ul>
+<h5 id="用法2-禁止百度自动转码"><a href="#用法2-禁止百度自动转码" class="headerlink" title="用法2.(禁止百度自动转码)"></a>用法2.(禁止百度自动转码)</h5><p>说明：用于禁止当前页面在移动端浏览时，被百度自动转码。虽然百度的本意是好的，但是转码效果很多时候却不尽人意。所以可以在head中加入例子中的那句话，就可以避免百度自动转码了。举例：</p>
+<pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-siteapp&quot; /&gt;
+</code></pre><h4 id="D-expires-网页到期时间"><a href="#D-expires-网页到期时间" class="headerlink" title="D. expires(网页到期时间)"></a>D. expires(网页到期时间)</h4><p>说明:用于设定网页的到期时间，过期后网页必须到服务器上重新传输。举例：</p>
+<pre><code>&lt;meta http-equiv=&quot;expires&quot; content=&quot;Sunday 26 October 2016 01:00 GMT&quot; /&gt;
+</code></pre><h4 id="E-refresh-自动刷新并指向某页面"><a href="#E-refresh-自动刷新并指向某页面" class="headerlink" title="E. refresh(自动刷新并指向某页面)"></a>E. refresh(自动刷新并指向某页面)</h4><p>说明：网页将在设定的时间内，自动刷新并调向设定的网址。举例:</p>
+<pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;2；URL=http://www.google.com/&quot;&gt; //意思是2秒后跳转向google
+</code></pre><h4 id="F-Set-Cookie-cookie设定"><a href="#F-Set-Cookie-cookie设定" class="headerlink" title="F. Set-Cookie(cookie设定)"></a>F. Set-Cookie(cookie设定)</h4><p>说明：如果网页过期。那么这个网页存在本地的cookies也会被自动删除。</p>
+<pre><code>&lt;meta http-equiv=&quot;Set-Cookie&quot; content=&quot;name, date&quot;&gt; //格式
+&lt;meta http-equiv=&quot;Set-Cookie&quot; content=&quot;User=Lxxyx; path=/; expires=Sunday, 10-Jan-16 10:00:00 GMT&quot;&gt; //具体范例
+</code></pre><hr>
+<blockquote>
+<p>小标签，大作用~~</p>
+</blockquote>
+
 
                 <hr>
 
@@ -203,13 +276,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/MyBlog/2017/04/01/JS是单线程的！/" data-toggle="tooltip" data-placement="top" title="JS是单线程的！">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/MyBlog/2017/03/31/什么是EJS语法/" data-toggle="tooltip" data-placement="top" title="什么是EJS语法">Next Post &rarr;</a>
+                            <a href="/MyBlog/2017/04/01/JS是单线程的！/" data-toggle="tooltip" data-placement="top" title="JS是单线程的！">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -258,9 +327,7 @@
                        
                           <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
                         
-                          <a class="tag" href="/MyBlog/tags/#webpack" title="webpack">webpack</a>
-                        
-                          <a class="tag" href="/MyBlog/tags/#入坑指南" title="入坑指南">入坑指南</a>
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
                         
                     </div>
                 </section>
@@ -304,8 +371,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/01/webpack入坑之旅（二）/";
-    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/01/webpack入坑之旅（二）/";
+    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/10/meta标签的学习/";
+    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/10/meta标签的学习/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
