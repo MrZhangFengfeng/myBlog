@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="张学峰的个人博客  上海大学研究生 前端工程师">
+    <meta name="keyword"  content="张学峰 博客 技术 上海大学 前端 张峰峰 前段工程师">
+    <link rel="shortcut icon" href="/MyBlog/img/favicon.ico">
+
+    <title>
+        
+          Npm - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/13/npm基本用法和实用技巧/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/MyBlog/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/MyBlog/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/MyBlog/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/MyBlog/">ZFf Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/MyBlog/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('npm.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
+                        
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
+                        
+                    </div>
+                    <h1>Npm</h1>
+                    <h2 class="subheading">npm基本用法和实用技巧</h2>
+                    <span class="meta">
+                        Posted by 张学峰 on
+                        2017-04-13
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><img src="https://docs.npmjs.com/images/npm.svg" width="250"></p>
+<h1 id="npm-基本用法和实用技巧"><a href="#npm-基本用法和实用技巧" class="headerlink" title="npm 基本用法和实用技巧"></a>npm 基本用法和实用技巧</h1><!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+<ul>
+<li><a href="#基本用法">基本用法</a><ul>
+<li><a href="#安装与升级">安装与升级</a><ul>
+<li><a href="#安装">安装</a></li>
+<li><a href="#升级">升级</a></li>
+<li><a href="#安装指定版本的-npm">安装指定版本的 npm</a></li>
+</ul>
+</li>
+<li><a href="#常用命令">常用命令</a><ul>
+<li><a href="#npm-install">npm install</a></li>
+<li><a href="#npm-uninstall">npm uninstall</a></li>
+<li><a href="#npm-update">npm update</a></li>
+<li><a href="#npm-ls">npm ls</a></li>
+<li><a href="#npm-adduser">npm adduser</a></li>
+<li><a href="#npm-init">npm init</a></li>
+<li><a href="#npm-publish">npm publish</a></li>
+<li><a href="#npm-unpublish">npm unpublish</a></li>
+<li><a href="#npm-deprecate">npm deprecate</a></li>
+<li><a href="#npm-dist-tag">npm dist-tag</a></li>
+<li><a href="#npm-view">npm view</a></li>
+<li><a href="#npm-link">npm link</a></li>
+<li><a href="#npm-conifg">npm conifg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#工作原理">工作原理</a></li>
+<li><a href="#实用技巧">实用技巧</a><ul>
+<li><a href="#pacakgejson">pacakge.json</a><ul>
+<li><a href="#dependencies">dependencies</a></li>
+<li><a href="#optionaldependencies">optionalDependencies</a></li>
+<li><a href="#peerdependencies">peerDependencies</a></li>
+<li><a href="#bundleddependencies">bundledDependencies</a></li>
+<li><a href="#bin">bin</a></li>
+<li><a href="#config">config</a></li>
+</ul>
+</li>
+<li><a href="#npmrc">.npmrc</a></li>
+<li><a href="#npmignore">.npmignore</a></li>
+<li><a href="#scripts">scripts</a></li>
+<li><a href="#shrinkwrap">shrinkwrap</a></li>
+<li><a href="#cache">cache</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="安装与升级"><a href="#安装与升级" class="headerlink" title="安装与升级"></a>安装与升级</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>安装 Node.js 时会自动安装 npm。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm <span class="keyword">install</span> <span class="number">4</span></div></pre></td></tr></table></figure>
+<h4 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h4><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install <span class="built_in">npm</span> -g</div></pre></td></tr></table></figure>
+<h4 id="安装指定版本的-npm"><a href="#安装指定版本的-npm" class="headerlink" title="安装指定版本的 npm"></a>安装指定版本的 npm</h4><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install <span class="built_in">npm</span>@<span class="number">2</span> -g</div></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="npm-install"><a href="#npm-install" class="headerlink" title="npm install"></a>npm install</h4><ol>
+<li><p>根据 <code>package.json</code> 文件安装依赖。</p>
+ <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装指定的依赖包。</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install [<span class="tag">&lt;<span class="name">@scope</span>&gt;</span>/]<span class="tag">&lt;<span class="name">pkg</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果当前目录中存在 <code>package.json</code> 文件，则安装满足文件中版本规则的最高版本；否则安装最新版本依赖包。</p>
+</blockquote>
+</li>
+<li><p>安装指定版本的依赖包。</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install [<span class="tag">&lt;<span class="name">@scope</span>&gt;</span>/]<span class="tag">&lt;<span class="name">pkg</span>&gt;</span>@<span class="tag">&lt;<span class="name">tag</span>&gt;</span></div><div class="line">npm install [<span class="tag">&lt;<span class="name">@scope</span>&gt;</span>/]<span class="tag">&lt;<span class="name">pkg</span>&gt;</span>@<span class="tag">&lt;<span class="name">version</span>&gt;</span></div><div class="line">npm install [<span class="tag">&lt;<span class="name">@scope</span>&gt;</span>/]<span class="tag">&lt;<span class="name">pkg</span>&gt;</span>@<span class="tag">&lt;<span class="name">version</span> <span class="attr">range</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>从本地位置安装依赖。</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> &lt;folder&gt;</div><div class="line">npm <span class="keyword">install</span> &lt;tarball <span class="keyword">file</span>&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>可以用 <code>npm pack</code> 生成 <code>&lt;tarball file&gt;</code></p>
+</blockquote>
+</li>
+<li><p>从网络位置安装依赖。</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> &lt;tarball <span class="keyword">url</span>&gt;</div><div class="line">npm <span class="keyword">install</span> &lt;git:// <span class="keyword">url</span>&gt;</div><div class="line">npm <span class="keyword">install</span> &lt;github username&gt;/&lt;github <span class="keyword">project</span>&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用参数：</p>
+<ul>
+<li><p><code>-g, --global</code>：安装全局依赖，如果没有指定依赖包名，则将当前目录中的包安装至全局</p>
+</li>
+<li><p><code>-S, --save</code>：安装依赖的同时将该依赖写入 <code>dependencies</code></p>
+</li>
+<li><code>-D, --save-dev</code>：安装依赖的同时将该依赖写入 <code>devDependencies</code></li>
+<li><code>-O, --save-optional</code>：安装依赖的同时将该依赖写入 <code>optionalDependencies</code></li>
+<li><p><code>-E, --save-exact</code>：写入 <code>package.json</code> 时带有确切版本号</p>
+</li>
+<li><p><code>--no-optional</code>：不安装 optional dependencies，可继承</p>
+</li>
+<li><code>--only={dev[elopment]|prod[uction]}</code>：无视 <code>NODE_ENV</code>，只安装 <code>devDependencies</code> 或仅安装除了 <code>devDependencies</code> 之外的依赖项</li>
+<li><code>--dry-run</code>：走一遍安装的过程并报告结果，但实际上没有安装任何依赖</li>
+</ul>
+</li>
+<li><p>别名：<code>i</code></p>
+</li>
+</ol>
+<h4 id="npm-uninstall"><a href="#npm-uninstall" class="headerlink" title="npm uninstall"></a>npm uninstall</h4><ol>
+<li><p>删除一个指定的依赖包，并且完全移除为了该包而安装的任何文件</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall <span class="meta">[&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]</span>... [-S|--save|-D|--save-dev|-O|--save-optional]</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用参数：与 <code>npm install</code> 类似</p>
+</li>
+<li><p>别名：<code>remove</code>、<code>rm</code>、<code>r</code>、<code>un</code>、<code>unlink</code></p>
+</li>
+</ol>
+<h4 id="npm-update"><a href="#npm-update" class="headerlink" title="npm update"></a>npm update</h4><ol>
+<li><p>升级所有依赖包至版本规则允许的最新版本，并安装缺失的依赖包</p>
+ <figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">update</span> [<span class="symbol">&lt;pkg&gt;</span>...]</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用参数：</p>
+<ul>
+<li><code>-g</code>：升级全局依赖包</li>
+<li><code>--dev</code>：同时升级在 <code>devDependencies</code> 中的依赖包</li>
+<li><code>--depth Infinity</code>：从 <code>npm@2.6.1</code> 起 <code>npm update</code> 默认仅升级顶层依赖，使用该参数升级所有依赖包</li>
+<li><code>--save</code>：升级依赖包，同时记录升级后的版本</li>
+</ul>
+</li>
+<li><p>别名：<code>up</code>、<code>upgrade</code></p>
+</li>
+</ol>
+<h4 id="npm-ls"><a href="#npm-ls" class="headerlink" title="npm ls"></a>npm ls</h4><ol>
+<li><p>以树形结构打印依赖包及其版本</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm ls [[<span class="tag">&lt;<span class="name">@scope</span>&gt;</span>/]<span class="tag">&lt;<span class="name">pkg</span>&gt;</span> ...]</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用参数：</p>
+<ul>
+<li><code>--json</code>：以 JSON 格式输出</li>
+<li><code>--long</code>：输出额外信息</li>
+<li><code>--global</code>：输出全局依赖信息</li>
+<li><code>--depth &lt;int&gt;</code>：输出依赖树的最大深度</li>
+<li><code>--prod[uction]</code>：仅输出 <code>dependencies</code> 中的依赖</li>
+<li><code>--dev</code>：仅输出 <code>devDependencies</code> 中的依赖</li>
+</ul>
+</li>
+<li><p>别名：<code>list</code>、<code>la</code>、<code>ll</code></p>
+</li>
+</ol>
+<h4 id="npm-adduser"><a href="#npm-adduser" class="headerlink" title="npm adduser"></a>npm adduser</h4><p>登录 npm</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> adduser</div></pre></td></tr></table></figure>
+<h4 id="npm-init"><a href="#npm-init" class="headerlink" title="npm init"></a>npm init</h4><ol>
+<li><p>提问，然后产生一个 <code>package.json</code> 文件</p>
+ <figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init [-f|<span class="type">--force</span>|<span class="type">-y</span>|<span class="type">--yes</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p>常用参数：</p>
+<ul>
+<li><code>-f, --force, -y, --yes</code>：使用默认的答案，不再提问</li>
+<li><code>--scope &lt;scope&gt;</code>：指定新模块的 scope，例如 <code>mtfe</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="npm-publish"><a href="#npm-publish" class="headerlink" title="npm publish"></a>npm publish</h4><ol>
+<li><p>发布一个新的包，或一个包的新版本  </p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm publish <span class="meta">[&lt;tarball&gt;|&lt;folder&gt;]</span> [--tag &lt;tag&gt;] [--access &lt;<span class="keyword">public</span>|restricted&gt;]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有 tarball 或 folder 被指定，则使用当前目录</p>
+</blockquote>
+</li>
+<li><p>常用参数：</p>
+<ul>
+<li><code>--tag &lt;tag&gt;</code>：给被发布的包注册指定的 tag，如果没有该参数，则默认使用 <code>latest</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="npm-unpublish"><a href="#npm-unpublish" class="headerlink" title="npm unpublish"></a>npm unpublish</h4><p>取消发布一个包，或一个包的某些版本（不建议使用，建议使用deprecate）<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm unpublish <span class="meta">[&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]</span></div></pre></td></tr></table></figure></p>
+<h4 id="npm-deprecate"><a href="#npm-deprecate" class="headerlink" title="npm deprecate"></a>npm deprecate</h4><p>弃用一个包，或一个包的某些版本，尝试安装这些弃用包的用户将会收到警告</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm deprecate <span class="tag">&lt;<span class="name">pkg</span>&gt;</span>[@<span class="tag">&lt;<span class="name">version</span>&gt;</span>] <span class="tag">&lt;<span class="name">message(你可以自定义的一些警告信息)</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="npm-dist-tag"><a href="#npm-dist-tag" class="headerlink" title="npm dist-tag"></a>npm dist-tag</h4><ol>
+<li><p>给一个包的某个版本注册（添加） tag</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm dist-tag add &lt;pkg&gt;@&lt;version&gt; <span class="meta">[&lt;tag&gt;]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>移除一个 tag</p>
+ <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm dist-<span class="keyword">tag</span> <span class="title">rm</span> <span class="tag">&lt;pkg&gt;</span> <span class="tag">&lt;tag&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>显示指定包的所有 tag</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm dist-tag ls <span class="meta">[&lt;pkg&gt;]</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="npm-view"><a href="#npm-view" class="headerlink" title="npm view"></a>npm view</h4><ol>
+<li><p>显示一个包的详细信息（npm的 非本地的）</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm view <span class="meta">[&lt;@scope&gt;/]&lt;name&gt;[@&lt;version&gt;]</span> <span class="meta">[&lt;field&gt;[.&lt;subfield&gt;]</span>...]</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>&lt;field&gt;</code> 和 <code>&lt;subfield&gt;</code> 表示输出信息中的字段</p>
+</blockquote>
+</li>
+<li><p>别名：<code>info</code>、<code>show</code>、<code>v</code></p>
+</li>
+</ol>
+<h4 id="npm-link"><a href="#npm-link" class="headerlink" title="npm link"></a>npm link</h4><p>将一个本地目录中的模块符号链接至一个项目的依赖中，实现上述功能需要两步：</p>
+<ol>
+<li><p>在模块目录中执行下面的命令，创建一个从全局依赖指向当前目录的符号链接</p>
+ <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> link</div></pre></td></tr></table></figure>
+ <figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/local/Cellar/nvm/<span class="number">0.25</span>.<span class="number">4</span>/versions/node/v4.<span class="number">4.4</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">handgrip</span></span></div><div class="line">-&gt; <span class="regexp">/Users/</span>Dylan/handgrip</div></pre></td></tr></table></figure>
+</li>
+<li><p>在其他目录中执行下面的命令，创建一个从局部依赖指向全局依赖的符号链接</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm link <span class="meta">[&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>[&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]</code> 所表示已经执行了第一步的模块，或其所包含的版本</p>
+</blockquote>
+ <figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># npm link handgrip</span></div><div class="line">/Users/Dylan/koalition-boilerplate/node_modules/handgrip</div><div class="line">-&gt; <span class="regexp">/usr/local</span><span class="regexp">/Cellar/nvm</span><span class="regexp">/0.25.4/versions</span><span class="regexp">/node/v</span>4.<span class="number">4.4</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">handgrip</span></span></div><div class="line">-&gt; <span class="regexp">/Users/</span>Dylan/handgrip</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>由于依赖通过符号链接的方式组织，在模块目录中的修改可以立即在其他目录中生效。  </p>
+<h4 id="npm-conifg"><a href="#npm-conifg" class="headerlink" title="npm conifg"></a>npm conifg</h4><ol>
+<li><p>设置一个配置项</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    npm config <span class="keyword">set</span> &lt;<span class="keyword">key</span>&gt; &lt;<span class="keyword">value</span>&gt; [-g|<span class="comment">--global]</span></div><div class="line">    npm <span class="keyword">set</span> &lt;<span class="keyword">key</span>&gt; &lt;<span class="keyword">value</span>&gt; [-g|<span class="comment">--global]</span></div><div class="line">    <span class="string">``</span><span class="string">`  </span></div><div class="line"></div><div class="line">    如果配置项的值阙如，将采用默认值 `<span class="literal">true</span><span class="string">`。</span></div><div class="line"></div><div class="line">2. 读取一个配置项</div></pre></td></tr></table></figure>
+<p> npm config get <key><br> npm get <key></key></key></p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">3. </span>删除一个配置项</div></pre></td></tr></table></figure>
+<p> npm config delete key</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">4. </span>列出所有的配置</div></pre></td></tr></table></figure>
+<p> npm config list</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="bullet">5. </span>在编辑器中打开配置文件</div></pre></td></tr></table></figure>
+<p> npm config edit</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="code">    使用 `--global` 来打开全局配置文件。</span></div><div class="line"></div><div class="line"><span class="section">## 工作原理</span></div><div class="line"></div><div class="line"><span class="quote">&gt; 下面的内容基本上翻译了 [npm v3 Dependency Resolution](https://docs.npmjs.com/how-npm-works/npm3)、[npm3 Duplication and Deduplication](https://docs.npmjs.com/how-npm-works/npm3-dupe)、[npm3 Non-determinism](https://docs.npmjs.com/how-npm-works/npm3-nondet) 这三篇文章</span></div><div class="line"></div><div class="line">npm v3 依赖解析的主要思想：尽可能地减少间接依赖安装目录的深度，最理想的情况是与直接依赖安装在同一目录下，通过这种方式来减少依赖目录的嵌套，缓解整个依赖目录层次过深的问题。（因为 Windows 中文件路径的长度不能大于 260 个字符。）</div><div class="line"></div><div class="line">🌰：</div><div class="line"></div><div class="line">假如我们有模块 A，模块 A 依赖了模块 B。</div><div class="line"></div><div class="line">![<span class="string">模块 A 依赖模块 B</span>](<span class="link">https://docs.npmjs.com/images/npm3deps1.png</span>)</div><div class="line"></div><div class="line">然后我们创建了已依赖模块 A 的应用 App。</div><div class="line"></div><div class="line">在执行 <span class="code">`npm install`</span> 的时候，npm v3 会把模块 A 及其依赖模块 B 都安装在 <span class="code">`/node_modules`</span> 目录中。（npm v2 则会把模块 B 会嵌套在模块 A 中。）</div><div class="line"></div><div class="line">![<span class="string">npm2 vs 3</span>](<span class="link">https://docs.npmjs.com/images/npm3deps2.png</span>)</div><div class="line"></div><div class="line">此时，我们的应用 App 又需要依赖模块 C，而模块 C 依赖了另一个版本的模块 B。</div><div class="line"></div><div class="line">![<span class="string">新依赖模块 C</span>](<span class="link">https://docs.npmjs.com/images/npm3deps3.png</span>)</div><div class="line"></div><div class="line">然而，由于模块 B v1.0 已经被安装在了顶层依赖目录中，模块 B v2.0 就无法安装到同一位置了。这种情况下，npm v3 将会默认采用 npm v2 的行为，将这个新的模块 B 嵌套在依赖它的模块中，也就是说，把模块 B v2.0 安装到模块 C 中。</div><div class="line"></div><div class="line">![<span class="string">依赖嵌套</span>](<span class="link">https://docs.npmjs.com/images/npm3deps4.png</span>)</div><div class="line"></div><div class="line">在控制台打印出依赖树和目录树。</div><div class="line"></div><div class="line">![<span class="string">依赖树与目录树</span>](<span class="link">https://docs.npmjs.com/images/tree.png</span>)</div><div class="line"></div><div class="line"><span class="emphasis">***</span></div><div class="line"></div><div class="line"><span class="emphasis">*如果再安装一个依赖模块 B v1.0 或 v2.0 会怎么样呢？*</span></div><div class="line"></div><div class="line">此时，我们的应用 App 又需要依赖模块 D，而模块 D 与模块 C 一样，依赖了模块 B v2.0。</div><div class="line"></div><div class="line">![<span class="string">新依赖模块 D</span>](<span class="link">https://docs.npmjs.com/images/npm3deps5.png</span>)</div><div class="line"></div><div class="line">由于模块 B v1.0 已经被安装在了顶层依赖目录中，模块 B v2.0 就无法安装到同一位置了。因此，尽管模块 C 中已经有了一份拷贝，模块 B v2.0 还是被安装到了模块 D 中（否则就 requrie 不到了）。</div><div class="line"></div><div class="line">![<span class="string">未去重</span>](<span class="link">https://docs.npmjs.com/images/npm3deps6.png</span>)</div><div class="line"></div><div class="line">如果一个间接依赖被两个以上的包所依赖，且不能安装在顶层依赖目录中，那么这个间接依赖会被复制一份，并嵌套在直接依赖的目录中。</div><div class="line"></div><div class="line">相反地，如果一个间接依赖被两个以上的包所依赖，且被安装在顶层依赖目录中，那么这个依赖就不会被复制，而被依赖它的包所共享。</div><div class="line"></div><div class="line">🌰，我们又加了一个依赖模块 E，模块 E 与模块 A 一样，依赖了模块 B v1.0。</div><div class="line"></div><div class="line">![<span class="string">新依赖模块 E</span>](<span class="link">https://docs.npmjs.com/images/npm3deps7.png</span>)</div><div class="line"></div><div class="line">由于模块 B v1.0 已经安装再来顶层依赖目录中，所以不需要复制并嵌套该模块，直接安装模块 E，然后模块 E 就可以与模块 A 共享模块 B v1.0 了。</div><div class="line"></div><div class="line">![](https://docs.npmjs.com/images/npm3deps8.png)</div><div class="line"></div><div class="line">在控制台打印出依赖树和目录树。</div><div class="line"></div><div class="line">![<span class="string">依赖树与目录树</span>](<span class="link">https://docs.npmjs.com/images/tree2.png</span>)</div><div class="line"></div><div class="line"><span class="emphasis">***</span></div><div class="line"></div><div class="line"><span class="emphasis">*如果我们把模块 A 升级至 v2.0，模块 A v2.0 不再依赖模块 B v1.0，而是依赖模块 B v2.0，这会怎么样呢？*</span></div><div class="line"></div><div class="line">执行 <span class="code">`npm install mod-a@2`</span>，npm v3 将做以下事情：</div><div class="line"></div><div class="line"><span class="bullet">1. </span>移除模块 A v1.0</div><div class="line"><span class="bullet">2. </span>安装模块 A v2.0</div><div class="line"><span class="bullet">3. </span>保留模块 B v1.0，因为模块 E 仍旧依赖它</div><div class="line"><span class="bullet">4. </span>由于模块 B v1.0 还在顶层依赖目录中，模块 B v2.0 被嵌套安装在模块 A v2.0 中</div><div class="line"></div><div class="line">![](https://docs.npmjs.com/images/npm3deps10.png)</div><div class="line"></div><div class="line">在控制台打印出依赖树和目录树。</div><div class="line"></div><div class="line">![<span class="string">依赖树与目录树</span>](<span class="link">https://docs.npmjs.com/images/tree3.png</span>)</div><div class="line"></div><div class="line">最后，我们吧模块 E 升级至 v2.0，模块 E v2.0 同样不再依赖模块 B v1.0，而是依赖模块 B v2.0。</div><div class="line"></div><div class="line">![](https://docs.npmjs.com/images/npm3deps11.png)</div><div class="line"></div><div class="line">npm v3 将做以下事情：</div><div class="line"></div><div class="line"><span class="bullet">1. </span>移除模块 E v1.0</div><div class="line"><span class="bullet">2. </span>安装模块 E v2.0</div><div class="line"><span class="bullet">3. </span>由于没有模块依赖模块 B v1.0，移除该模块</div><div class="line"><span class="bullet">4. </span>由于顶层依赖目录中没有模块 B，在该目录中安装模块 B v2.0</div><div class="line"></div><div class="line">![](https://docs.npmjs.com/images/npm3deps12.png)</div><div class="line"></div><div class="line">在控制台打印出依赖树和目录树。</div><div class="line"></div><div class="line">![<span class="string">依赖树与目录树</span>](<span class="link">https://docs.npmjs.com/images/tree4.png</span>)</div><div class="line"></div><div class="line">现在，模块 B v2.0 几乎出现在了每一个依赖目录中，这显然不够简洁，我们可以执行：</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>npm dedupe(可以理解为去重的意思)<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这条命令可以仅保留顶层依赖目录中的模块 <span class="selector-tag">B</span> <span class="selector-tag">v2</span><span class="selector-class">.0</span>，而移除其他次级目录中的拷贝。</div><div class="line"></div><div class="line">在控制台打印出目录树。</div><div class="line"></div><div class="line">!<span class="selector-attr">[目录树]</span>(<span class="attribute">https</span>:<span class="comment">//docs.npmjs.com/images/tree5.png)</span></div><div class="line"></div><div class="line">***</div><div class="line"></div><div class="line">我们让 App 回到刚才的一个状态：</div><div class="line"></div><div class="line">![](<span class="attribute">https</span>:<span class="comment">//docs.npmjs.com/images/npm3deps8.png)</span></div><div class="line"></div><div class="line">在这个🌰中，我们的应用有以下 <span class="built_in">`package.json`</span> 文件：</div><div class="line"></div><div class="line"><span class="built_in">``</span>`js</div><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"example3"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">""</span>,</div><div class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</div><div class="line">  <span class="string">"scripts"</span>: &#123;</div><div class="line">    <span class="string">"test"</span>: <span class="string">"echo \"</span><span class="attribute">Error</span>: no test specified\<span class="string">" &amp;&amp; exit 1"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"keywords"</span>: [],</div><div class="line">  <span class="string">"author"</span>: <span class="string">""</span>,</div><div class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"mod-a"</span>: <span class="string">"^1.0.0"</span>,</div><div class="line">    <span class="string">"mod-c"</span>: <span class="string">"^1.0.0"</span>,</div><div class="line">    <span class="string">"mod-d"</span>: <span class="string">"^1.0.0"</span>,</div><div class="line">    <span class="string">"mod-e"</span>: <span class="string">"^1.0.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果此时运行 <code>npm install</code>，控制台会输出以下结果：</p>
+<p><img src="https://docs.npmjs.com/images/npm3deps14.png" alt=""></p>
+<p>然后，我们再次把模块 A 升级到 v2.0，模块 A v2.0 不在依赖模块 B v1.0，而是依赖模块 B v2.0：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install <span class="keyword">mod</span>-<span class="keyword">a</span>@<span class="number">2</span> <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p>控制台输出：</p>
+<p><img src="https://docs.npmjs.com/images/npm3deps15.png" alt=""></p>
+<p>此时，我们的依赖目录看起来是这样的：</p>
+<p><img src="https://docs.npmjs.com/images/npm3deps10.png" alt=""></p>
+<p>而且我们得到了一个新的 <code>package.json</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"example3"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">""</span>,</div><div class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</div><div class="line">  <span class="string">"scripts"</span>: &#123;</div><div class="line">    <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"keywords"</span>: [],</div><div class="line">  <span class="string">"author"</span>: <span class="string">""</span>,</div><div class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"mod-a"</span>: <span class="string">"^2.0.0"</span>,</div><div class="line">    <span class="string">"mod-c"</span>: <span class="string">"^1.0.0"</span>,</div><div class="line">    <span class="string">"mod-d"</span>: <span class="string">"^1.0.0"</span>,</div><div class="line">    <span class="string">"mod-e"</span>: <span class="string">"^1.0.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着，我们运行：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span>（整体重新装）</div></pre></td></tr></table></figure>
+<p>控制台输出：</p>
+<p><img src="https://docs.npmjs.com/images/npm3deps16.png" alt=""></p>
+<p>依赖目录变成了：</p>
+<p><img src="https://docs.npmjs.com/images/npm3deps17.png" alt=""></p>
+<hr>
+<p><strong>总结：</strong></p>
+<ol>
+<li><p>依赖目录的结构取决于依赖安装的顺序</p>
+<p> <img src="https://docs.npmjs.com/images/install-order.png" alt=""></p>
+</li>
+<li><p><code>npm install</code> （不带参数）安装出的依赖目录结构是稳定的，因为 <code>package.json</code> 中依赖的排列顺序总是字典序</p>
+</li>
+<li>npm v3 需要尽可能的减少间接依赖安装目录的深度，于是不得不从树根至树叶一级一级遍历下来，寻找可用的最远祖先节点，严重延长了依赖的安装时间</li>
+</ol>
+<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="pacakge-json"><a href="#pacakge-json" class="headerlink" title="pacakge.json"></a>pacakge.json</h3><h4 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h4><p>版本号的写法：</p>
+<ul>
+<li><code>version</code>: 必须匹配确切的版本号</li>
+<li><code>&gt;version</code>、<code>&gt;=version</code>、<code>&lt;version</code>、<code>&lt;=version</code></li>
+<li><code>~version</code>：如果 minor 级的版本被确定的话，允许 patch 级的版本变化；否则允许 minor 级版本变化<ul>
+<li><code>~1.2.3</code> := <code>&gt;=1.2.3 &lt;1.3.0</code></li>
+<li><code>~1.2</code> := <code>&gt;=1.2.0 &lt;1.3.0</code></li>
+<li><code>~1</code> := <code>&gt;=1.0.0 &lt;2.0.0</code></li>
+<li><code>~0.2.3</code> := <code>&gt;=0.2.3 &lt;0.3.0</code></li>
+<li><code>~0</code> := <code>&gt;=0.0.0 &lt;1.0.0</code></li>
+<li><code>~1.2.3-beta.2</code> := <code>&gt;=1.2.3-beta.2 &lt;1.3.0</code></li>
+</ul>
+</li>
+<li><code>^version</code>：允许版本号中不修改最左非零位及其前缀的所有版本号更高的变化<ul>
+<li><code>^1.2.3</code> := <code>&gt;=1.2.3 &lt;2.0.0</code></li>
+<li><code>^0.2.3</code> := <code>&gt;=0.2.3 &lt;0.3.0</code></li>
+<li><code>^0.0.3</code> := <code>&gt;=0.0.3 &lt;0.0.4</code></li>
+<li><code>^1.2.3-beta.2</code> := <code>&gt;=1.2.3-beta.2 &lt;2.0.0</code></li>
+<li><code>^0.0.3-beta</code> := <code>&gt;=0.0.3-beta &lt;0.0.4</code></li>
+<li><code>^1.2.x</code> := <code>&gt;=1.2.0 &lt;2.0.0</code></li>
+<li><code>^0.0.x</code> := <code>&gt;=0.0.0 &lt;0.1.0</code></li>
+<li><code>^0.0</code> := <code>&gt;=0.0.0 &lt;0.1.0</code></li>
+<li><code>^1.x</code> := <code>&gt;=1.0.0 &lt;2.0.0</code></li>
+</ul>
+</li>
+<li><code>1.2.x</code>：<code>1.2.0</code>、<code>1.2.1</code> 等，不包括 <code>1.3.0</code></li>
+<li><code>*</code> 或空：任何版本</li>
+<li><code>version1 - version2</code>：<code>&gt;=version1 &lt;=version2</code></li>
+<li><code>range1 || range2</code></li>
+<li><code>tag</code>：指定 tag</li>
+<li><code>file:...</code>：本地路径</li>
+<li><code>http://...</code>、<code>git...</code>：网络路径<ul>
+<li><code>git://github.com/user/project.git#commit-ish</code></li>
+<li><code>git+ssh://user@hostname:project.git#commit-ish</code></li>
+<li><code>git+ssh://user@hostname/project.git#commit-ish</code></li>
+<li><code>git+http://user@hostname/project/blah.git#commit-ish</code></li>
+<li><code>git+https://user@hostname/project/blah.git#commit-ish</code></li>
+</ul>
+</li>
+<li><code>user/repo#commit-ish</code>：GitHub 仓库</li>
+</ul>
+<h4 id="optionalDependencies"><a href="#optionalDependencies" class="headerlink" title="optionalDependencies"></a>optionalDependencies</h4><p><code>optionalDependencies</code> 中的依赖安装失败时，npm 不会停止整个安装过程。</p>
+<p>模块本身应当处理由于依赖安装失败导致依赖缺失的问题，🌰如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  <span class="keyword">var</span> foo = <span class="built_in">require</span>(<span class="string">'foo'</span>)</div><div class="line">  <span class="keyword">var</span> fooVersion = <span class="built_in">require</span>(<span class="string">'foo/package.json'</span>).version</div><div class="line">&#125; <span class="keyword">catch</span> (er) &#123;</div><div class="line">  foo = <span class="literal">null</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> ( notGoodFooVersion(fooVersion) ) &#123;</div><div class="line">  foo = <span class="literal">null</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// .. then later in your program ..</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> (foo) &#123;</div><div class="line">  foo.doFooThings()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><p><code>peerDependencies</code> 表示当前模块<strong>适配</strong>其他某些模块，也就是只有当那些指定的模块被安装时，当前模块才会被安装。</p>
+<p>🌰如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"tea-latte"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.3.5"</span>,</div><div class="line">  <span class="string">"peerDependencies"</span>: &#123;</div><div class="line">    <span class="string">"tea"</span>: <span class="string">"2.x"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示确保模块 tea-latte 只能同模块 tea 2.x 一起安装。</p>
+<blockquote>
+<p>如果 <code>peerDependencies</code> 中的模块没有被明确依赖的话，npm v2 会自动安装这些模块，但 npm v3 不会再安装这些模块，而是输出一个警告。</p>
+</blockquote>
+<h4 id="bundledDependencies"><a href="#bundledDependencies" class="headerlink" title="bundledDependencies"></a>bundledDependencies</h4><p><code>bundledDependencies</code> 表示在当前模块打包或发布时，需要被置于模块内部的依赖。</p>
+<p>使用的时机：</p>
+<ol>
+<li>使用的依赖不是来自于 npm，或者修改了这个依赖</li>
+<li>使用开发者自己的项目作为依赖</li>
+<li>希望在模块中包含一些文件</li>
+</ol>
+<h4 id="bin"><a href="#bin" class="headerlink" title="bin"></a>bin</h4><p>将可执行的文件安装到 PATH 中。可能安装到的位置有：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># global:</span></div><div class="line"><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/opt/</span>nvm<span class="meta-keyword">/versions/</span>node/v4<span class="number">.4</span><span class="number">.4</span><span class="meta-keyword">/bin/</span></div><div class="line"><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span></div><div class="line"></div><div class="line"><span class="meta"># local:</span></div><div class="line">./node_modules/.bin/</div></pre></td></tr></table></figure>
+<p>🌰：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"bin"</span> : &#123; <span class="string">"myapp"</span> : <span class="string">"./cli.js"</span> &#125; &#125;</div></pre></td></tr></table></figure>
+<p>当安装这个模块时，npm 会创建一个指向 <code>cli.js</code> 的符号链接。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"name"</span>: <span class="string">"my-program"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.2.5"</span>,</div><div class="line">  <span class="string">"bin"</span>: <span class="string">"./path/to/program"</span> &#125;</div></pre></td></tr></table></figure>
+<p>上面的写法等价于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"name"</span>: <span class="string">"my-program"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.2.5"</span>,</div><div class="line">  <span class="string">"bin"</span> : &#123; <span class="string">"my-program"</span> : <span class="string">"./path/to/program"</span> &#125; &#125;</div></pre></td></tr></table></figure>
+<h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><p><code>package.json</code> 文件中的 <code>config</code> 字段可以用来设置模块脚本中可以用到的配置参数。</p>
+<p>🌰，如果一个模块有：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"name"</span> : <span class="string">"foo"</span>,</div><div class="line">  <span class="string">"config"</span> : &#123; <span class="string">"port"</span> : <span class="string">"8080"</span> &#125; &#125;</div></pre></td></tr></table></figure>
+<p>那么在模块脚本（如 <code>start</code>）中就可以通过 <code>process.env.npm_package_config_port</code>，访问到这个配置。</p>
+<p>这个配置也可以被命令 <code>npm config set foo:port 8001</code> 覆盖。</p>
+<h3 id="npmrc"><a href="#npmrc" class="headerlink" title=".npmrc"></a>.npmrc</h3><p>配置文件有：</p>
+<ul>
+<li>项目配置文件（/path/to/my/project/.npmrc）</li>
+<li>用户配置文件（~/.npmrc）</li>
+<li>全局配置文件（/path/to/node/etc/npmrc）</li>
+<li>内置配置文件（/path/to/npm/npmrc）</li>
+</ul>
+<p>环境变量用法：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">prefix</span> = <span class="variable">$&#123;HOME&#125;</span>/.npm-packages</div></pre></td></tr></table></figure>
+<p>数组用法：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">key[]</span> = <span class="string">"first value"</span></div><div class="line"><span class="attr">key[]</span> = <span class="string">"second value"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>项目配置文件和用户配置文件的权限必须设置为只能被当前用户读写（0600），否则该配置文件会被 npm 忽略</p>
+</blockquote>
+<p>可以通过 <code>npm config</code> 命令来管理配置文件。</p>
+<p>常用配置项：</p>
+<ul>
+<li><code>cache</code>：npm 本地缓存目录，默认 <code>~/.npm</code></li>
+<li><code>cache-max</code>：保持缓存项目且不向 registry 检查的最长时间，单位秒，默认 <code>Infinity</code>，缓存中的数据不会自动删除除非执行 <code>npm cache clean</code> 命令</li>
+<li><code>cache-min</code>：保持缓存项目且不向 registry 检查的最短时间，单位秒，默认 <code>10</code>，可以置为 <code>999999</code> 等以尽量延长缓存生效时间</li>
+<li><code>depth</code>：<code>npm ls</code> 等命令中的默认深度，默认 <code>Infinity</code></li>
+<li><code>editor</code>：npm 默认使用的编辑器</li>
+<li><code>engine-strict</code>：如果置为 <code>true</code>，npm 将会拒绝安装不符合当前 Node.js 版本的模块</li>
+<li><code>force</code>：强力执行一些命令<ul>
+<li>生命周期脚本执行失败不再阻塞安装过程</li>
+<li>发布会覆盖已经发布的版本</li>
+<li>访问 registry 时会跳过缓存</li>
+</ul>
+</li>
+<li><code>global</code>：全局模式</li>
+<li><code>globalconfig</code>：全局配置文件的路径</li>
+<li><code>global-style</code>：以安装全局依赖的方式安装局部依赖，只有直接依赖会被放在顶层依赖目录中</li>
+<li><code>https-proxy</code>：代理</li>
+<li><code>if-present</code>：如果置为 <code>true</code>，<code>npm run-script</code> 就不会在脚本找不到时报错</li>
+<li><code>ignore-scripts</code>：如果置为 <code>true</code>，npm 就不会运行 <code>package.json</code> 定义的脚本</li>
+<li><code>init-module</code>：指定 <code>npm init</code> 命令运行的模块</li>
+<li><code>init-author-name</code>：<code>npm init</code> 使用的默认作者名</li>
+<li><code>init-author-email</code>：<code>npm init</code> 使用的默认作者邮箱</li>
+<li><code>init-author-url</code>：<code>npm init</code> 使用的默认作者 URL</li>
+<li><code>init-license</code>：<code>npm init</code> 使用的默认许可证</li>
+<li><code>init-version</code>：<code>npm init</code> 使用的默认版本号</li>
+<li><code>json</code>：<code>npm ls</code> 等命令输出 JSON 格式的数据</li>
+<li><code>link</code>：如果置为 <code>true</code>，如果全局依赖中有合适的包，安装局部依赖时将会直接链接到这个全局依赖的包；如果全局依赖中没有该包的任何版本，则全局安装这个包，并链接到局部依赖中；其他情况则在局部依赖中安装该包</li>
+<li><code>long</code>：<code>npm ls</code> 和 <code>npm search</code> 显示额外信息</li>
+<li><code>message</code>：<code>npm version</code> 写在 git 提交中的信息，<code>%s</code> 将被替换为版本号</li>
+<li><code>npat</code>：安装时运行测试</li>
+<li><code>onload-script</code>：指定一个在 npm 加载时 <code>require()</code> 的包，编程使用 npm 时可能会有用</li>
+<li><code>only</code>：与命令中的 <code>--only</code> 效果类似</li>
+<li><code>optional</code>：如果置为 <code>false</code>，则不安装 <code>optionalDependencies</code> 中的依赖</li>
+<li><code>prefix</code>：指定安装全局依赖的路径</li>
+<li><code>production</code>：如果置为 <code>true</code>，则开启生产模式，<code>npm install</code> 将不安装开发依赖，声明周期脚本运行时自动设置 <code>NODE_ENV=&quot;production&quot;</code></li>
+<li><code>registry</code>：指定 npm registry 的 URL</li>
+<li><code>rollback</code>：移除安装失败的模块</li>
+<li><code>save</code>：与命令中的 <code>--save</code> 效果类似</li>
+<li><code>scope</code>：与命令中的 <code>--scope</code> 效果类似</li>
+<li><code>shrinkwrap</code>：如果置为 <code>false</code>，安装时忽略 <code>npm-shrinkwrap.json</code></li>
+<li><code>progress</code>：如果置为 <code>false</code>，不显示进度条</li>
+<li><code>loglevel</code>：设置输出日志的 level，置为 <code>silly</code> 可以显示全部日志</li>
+</ul>
+<h3 id="npmignore"><a href="#npmignore" class="headerlink" title=".npmignore"></a>.npmignore</h3><p>当模块目录中存在 <code>.gitignore</code> 但没有 <code>.npmignore</code> 时，npm 将会忽略 <code>.gitignore</code> 中的文件。如果目录中存在 <code>.npmignore</code>，npm 将会根据 <code>.npmignore</code> 忽略文件。</p>
+<p>默认被 npm 忽略，不需要添加到 <code>.npmignore</code> 中的文件：</p>
+<ul>
+<li><code>.*.swp</code></li>
+<li><code>._*</code></li>
+<li><code>.DS_Store</code></li>
+<li><code>.git</code></li>
+<li><code>.hg</code></li>
+<li><code>.npmrc</code></li>
+<li><code>.lock-wscript</code></li>
+<li><code>.svn</code></li>
+<li><code>.wafpickle-*</code></li>
+<li><code>config.gypi</code></li>
+<li><code>CVS</code></li>
+<li><code>npm-debug.log</code></li>
+</ul>
+<p>除了 bundled dependencies 外，node_modules 中的所有文件也会被忽略。</p>
+<p>下面的文件即使添加到 <code>.npmignore</code> 中的文件也不会被忽略：</p>
+<ul>
+<li><code>package.json</code></li>
+<li><code>README</code>（及其变体）</li>
+<li><code>CHANGELOG</code>（及其变体）</li>
+<li><code>LICENSE</code>、<code>LICENCE</code></li>
+</ul>
+<h3 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h3><p>npm 支持的生命周期脚本有：</p>
+<ul>
+<li><code>prepublish</code>: 发布模块之前执行，也在不带任何参数的局部 <code>npm install</code> 之前执行</li>
+<li><code>publish</code>、<code>postpublish</code>: 发布模块之后执行</li>
+<li><code>preinstall</code>: 安装该模块之前执行</li>
+<li><code>install</code>、<code>postinstall</code>: 安装该模块之后执行</li>
+<li><code>preuninstall</code>、<code>uninstall</code>: 移除该模块之前执行</li>
+<li><code>postuninstall</code>: 移除该模块之后执行</li>
+<li><code>preversion</code>、<code>version</code>: 修改模块版本号之前执行</li>
+<li><code>postversion</code>: 修改模块版本号之后执行</li>
+<li><code>pretest</code>、<code>test</code>、<code>posttest</code>: 在 <code>test</code> 命令的前后执行</li>
+<li><code>prestop</code>、<code>stop</code>、<code>poststop</code>: 在 <code>stop</code> 命令的前后执行</li>
+<li><code>prestart</code>、<code>start</code>、<code>poststart</code>: 在 <code>start</code> 命令的前后执行.</li>
+<li><code>prerestart</code>、<code>restart</code>、<code>postrestart</code>: 在 <code>restart</code> 命令的前后执行，如果 <code>restart</code> 脚本没有提供，<code>restart</code> 命令将会执行 <code>stop</code> 脚本再执行 <code>start</code> 脚本</li>
+</ul>
+<p>对于自定义名称的脚本，可以通过 <code>npm run-script &lt;pkg&gt; &lt;stage&gt;</code> 来执行，匹配名称的 <em>pre</em> 和 <em>post</em> 命令同样也会执行。</p>
+<h3 id="shrinkwrap"><a href="#shrinkwrap" class="headerlink" title="shrinkwrap"></a>shrinkwrap</h3><p><code>npm shrinkwrap</code> 可以用来锁定依赖的版本号。</p>
+<p>一个使用的🌰：</p>
+<ol>
+<li><p>我们有模块 A：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"A"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"B"</span>: <span class="string">"&lt;0.1.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 模块 B：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"B"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"C"</span>: <span class="string">"&lt;0.1.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 和模块 C：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"C"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.1"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 这三个模块都只有 0.0.1 这一个版本。此时运行 <code>npm install A</code>，将会得到：</p>
+ <figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A@<span class="number">0.0</span><span class="number">.1</span></div><div class="line">`-- B@<span class="number">0.0</span><span class="number">.1</span></div><div class="line">    `-- C@<span class="number">0.0</span><span class="number">.1</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果模块 B 发布了 0.0.2 版本，此时运行 <code>npm install A</code>，将会得到：</p>
+ <figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A@<span class="number">0.0</span><span class="number">.1</span></div><div class="line">`-- B@<span class="number">0.0</span><span class="number">.2</span></div><div class="line">    `-- C@<span class="number">0.0</span><span class="number">.1</span></div></pre></td></tr></table></figure>
+<p> 但是模块 A 的作者希望安装原来的版本，那么他可以运行：</p>
+ <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> shrinkwrap</div></pre></td></tr></table></figure>
+<p> 然后在项目目录下得到了一个 <code>npm-shrinkwrap.json</code> 文件：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"A"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"B"</span>: &#123;</div><div class="line">      <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">      <span class="string">"from"</span>: <span class="string">"B@&lt;0.1.0"</span>,</div><div class="line">      <span class="string">"resolved"</span>: <span class="string">"https://registry.npmjs.org/B/-/B-0.0.1.tgz"</span>,</div><div class="line">      <span class="string">"dependencies"</span>: &#123;</div><div class="line">        <span class="string">"C"</span>: &#123;</div><div class="line">          <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">          <span class="string">"from"</span>: <span class="string">"C@&lt;0.1.0"</span>,</div><div class="line">          <span class="string">"resolved"</span>: <span class="string">"https://registry.npmjs.org/C/-/C-0.0.1.tgz"</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> <code>npm shrinkwrap</code> 命令根据当前目录中的 node_modules 目录锁定了依赖版本号，此时再运行 <code>npm install</code>，该命令的行为将变为：</p>
+<ol>
+<li>重新构造 <code>npm-shrinkwrap.json</code> 中描述的依赖树，如果一个依赖项中的 <code>resolved</code> 字段可用，则使用该字段获取依赖，否则使用 <code>version</code> 字段来获取依赖</li>
+<li>以普通的方式安装 <code>npm-shrinkwrap.json</code> 中缺失的依赖</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>添加或升级依赖包的方法：</p>
+<ul>
+<li><p>添加或升级一个依赖包</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> <span class="comment">--save &lt;pkg&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>升级所有依赖包</p>
+  <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install --<span class="literal">no</span>-shrinkwrap</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意事项：</p>
+<ol>
+<li>如果 node_modules 目录中的依赖比 <code>package.json</code> 中定义的多或者少，<code>npm shrinkwrap</code> 命令将会失败</li>
+<li><code>npm shrinkwrap</code> 命令不锁定 <code>devDependencies</code> 中依赖的版本，即 <code>npm-shrinkwrap.json</code> 中不包含开发依赖；如果希望锁定开发依赖的版本，则需要在运行命令时加上 <code>--dev</code> 参数</li>
+<li>shrinkwrap 不会继承，即执行过程中不会访问依赖的 <code>npm-shrinkwrap.json</code> 文件；但是，依赖中如果有 <code>npm-shrinkwrap.json</code> 文件，在安装该依赖的时就会按照这个文件来安装相关的模块到 node_modules 目录中，如果没有 <code>npm-shrinkwrap.json</code> 文件，开发者需要在使用 shrinkwrap 前自行确认 node_modules 目录中的依赖都是有效的；shrinkwrap 总是据当前目录中的 node_modules 目录中的内容锁定依赖版本号</li>
+</ol>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>npm 将数据缓存在 <code>npm config get cache</code> 命令指定的路径中。</p>
+<p>当局部安装一个模块时，npm 会执行以下步骤：</p>
+<ol>
+<li>检查缓存中的模块信息文件（.cache.json，包括 ETag 等信息）是否存在并在免检时间内</li>
+<li>如果存在合适的缓存信息文件且没有超过免检时间，执行步骤 6</li>
+<li>获取该模块的最新信息文件，然后计算出合适的模块版本号</li>
+<li>如果缓存中有该版本号的模块，则执行步骤 6</li>
+<li>下载该版本号的模块，并将其载入缓存中</li>
+<li>取缓存中的文件，并将其安装至目标路径中</li>
+</ol>
+<p><code>npm cache</code> 命令的用法：</p>
+<ol>
+<li><p>向缓存中添加指定的模块：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">cache</span> <span class="keyword">add</span> &lt;tarball <span class="keyword">file</span>&gt;</div><div class="line">npm <span class="keyword">cache</span> <span class="keyword">add</span> &lt;folder&gt;</div><div class="line">npm <span class="keyword">cache</span> <span class="keyword">add</span> &lt;tarball <span class="keyword">url</span>&gt;</div><div class="line">npm <span class="keyword">cache</span> <span class="keyword">add</span> &lt;<span class="keyword">name</span>&gt;@&lt;<span class="keyword">version</span>&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示缓存中的数据：</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm cache ls <span class="meta">[&lt;path&gt;]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>清空缓存：</p>
+ <figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm cache clean <span class="meta">[&lt;path&gt;]</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>npm 缓存的改进方案：</p>
+<ol>
+<li><p><a href="https://github.com/nolanlawson/local-npm">local-npm</a>：一个本地 npm 镜像，但是仅缓存已经安装过的模块，没有网络时自动回退到本地</p>
+</li>
+<li><p><a href="https://github.com/mixu/npm_lazy">npm_lazy</a></p>
+</li>
+</ol>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/MyBlog/2017/04/10/meta标签的学习/" data-toggle="tooltip" data-placement="top" title="meta标签的学习">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/MyBlog/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/MyBlog/tags/#前端" title="前端">前端</a>
+                        
+                          <a class="tag" href="/MyBlog/tags/#知识点" title="知识点">知识点</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://www.shu.edu.cn" target="_blank">上海大学</a></li>
+                    
+                        <li><a href="http://www.imooc.com/" target="_blank">IMooc</a></li>
+                    
+                        <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
+                    
+                        <li><a href="https://www.codewars.com/dashboard" target="_blank">Codewars</a></li>
+                    
+                        <li><a href="https://leetcode.com/" target="_blank">LeetCode </a></li>
+                    
+                        <li><a href="https://www.nowcoder.com/4503581" target="_blank">牛客网 </a></li>
+                    
+                        <li><a href="https://developer.mozilla.org/en-US/" target="_blank">MDN </a></li>
+                    
+                        <li><a href="http://www.w3cschool.cn/" target="_blank">W3Cschool </a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/13/npm基本用法和实用技巧/";
+    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/04/13/npm基本用法和实用技巧/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/Mr张峰峰">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/MrZhangFengfeng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; ZFf Blog 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/MyBlog/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/MyBlog/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/MyBlog/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://github.com/MrZhangFengfeng/MyBlog/MyBlog/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'huangxuan.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/MyBlog/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
