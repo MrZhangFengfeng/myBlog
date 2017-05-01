@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/MyBlog/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/MyBlog/archives/">Archives</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/MyBlog/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/MyBlog/about/">About</a>
                         </li>
                         
                     
@@ -170,11 +170,11 @@
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 
+                    <a href="#知识点" title="知识点" rel="5">知识点</a>
+                
                     <a href="#生活" title="生活" rel="2">生活</a>
                 
                     <a href="#前端" title="前端" rel="6">前端</a>
-                
-                    <a href="#知识点" title="知识点" rel="4">知识点</a>
                 
                     <a href="#webpack" title="webpack" rel="2">webpack</a>
                 
@@ -182,14 +182,116 @@
                 
                     <a href="#语法" title="语法" rel="1">语法</a>
                 
-                    <a href="#github" title="github" rel="1">github</a>
-                
                     <a href="#博客" title="博客" rel="1">博客</a>
+                
+                    <a href="#github" title="github" rel="1">github</a>
                 
             </div>
 
             <!-- 标签列表 -->
 
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="知识点">
+                    <span class="tag-text">知识点</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/05/01/animation-timeing-function之steps属性详解/">
+                        <h2 class="post-title">
+                            animation-timeing-function之steps属性详解
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                带你走出对steps的误解
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/04/01/JS是单线程的！/">
+                        <h2 class="post-title">
+                            JS是单线程的！
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                JavaScript单线程的深入分析
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/04/10/meta标签的学习/">
+                        <h2 class="post-title">
+                            meta标签的学习
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                HTML meta标签总结与属性使用介绍
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/04/13/npm基本用法和实用技巧/">
+                        <h2 class="post-title">
+                            Npm
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                npm基本用法和实用技巧
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/03/29/什么是懒加载，为什么要用懒加载/">
+                        <h2 class="post-title">
+                            懒加载
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                什么是懒加载，为什么要用懒加载
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="生活">
@@ -284,44 +386,6 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/04/13/npm基本用法和实用技巧/">
-                        <h2 class="post-title">
-                            Npm
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                npm基本用法和实用技巧
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
-                        <h2 class="post-title">
-                            webpack入坑之旅（一）
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                webpack基本配置、生成项目中的HTML页面
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
                      <a href="/MyBlog/2017/04/01/webpack入坑之旅（二）/">
                         <h2 class="post-title">
                             webpack入坑之旅（二）
@@ -341,58 +405,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/03/29/什么是懒加载，为什么要用懒加载/">
+                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
                         <h2 class="post-title">
-                            懒加载
+                            webpack入坑之旅（一）
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                什么是懒加载，为什么要用懒加载
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="知识点">
-                    <span class="tag-text">知识点</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/MyBlog/2017/04/01/JS是单线程的！/">
-                        <h2 class="post-title">
-                            JS是单线程的！
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                JavaScript单线程的深入分析
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/MyBlog/2017/04/10/meta标签的学习/">
-                        <h2 class="post-title">
-                            meta标签的学习
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                HTML meta标签总结与属性使用介绍
+                                webpack基本配置、生成项目中的HTML页面
                             </h3>
                         
                     </a>
@@ -450,13 +469,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
+                     <a href="/MyBlog/2017/04/01/webpack入坑之旅（二）/">
                         <h2 class="post-title">
-                            webpack入坑之旅（一）
+                            webpack入坑之旅（二）
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                webpack基本配置、生成项目中的HTML页面
+                                处理项目中的资源文件
                             </h3>
                         
                     </a>
@@ -469,13 +488,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/04/01/webpack入坑之旅（二）/">
+                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
                         <h2 class="post-title">
-                            webpack入坑之旅（二）
+                            webpack入坑之旅（一）
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                处理项目中的资源文件
+                                webpack基本配置、生成项目中的HTML页面
                             </h3>
                         
                     </a>
@@ -495,13 +514,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
+                     <a href="/MyBlog/2017/04/01/webpack入坑之旅（二）/">
                         <h2 class="post-title">
-                            webpack入坑之旅（一）
+                            webpack入坑之旅（二）
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                webpack基本配置、生成项目中的HTML页面
+                                处理项目中的资源文件
                             </h3>
                         
                     </a>
@@ -514,13 +533,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/MyBlog/2017/04/01/webpack入坑之旅（二）/">
+                     <a href="/MyBlog/2017/03/29/webpack入坑记录/">
                         <h2 class="post-title">
-                            webpack入坑之旅（二）
+                            webpack入坑之旅（一）
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                处理项目中的资源文件
+                                webpack基本配置、生成项目中的HTML页面
                             </h3>
                         
                     </a>
@@ -557,32 +576,6 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="github">
-                    <span class="tag-text">github</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/MyBlog/2017/03/27/我的第一次提交项目到GitHub/">
-                        <h2 class="post-title">
-                            github项目提交
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                我的第一次提交项目到GitHub
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="博客">
                     <span class="tag-text">博客</span>
                 </span>
@@ -599,6 +592,32 @@
                         
                             <h3 class="post-subtitle">
                                 我的跟新博客的爬坑之旅
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="github">
+                    <span class="tag-text">github</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/MyBlog/2017/03/27/我的第一次提交项目到GitHub/">
+                        <h2 class="post-title">
+                            github项目提交
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                我的第一次提交项目到GitHub
                             </h3>
                         
                     </a>
