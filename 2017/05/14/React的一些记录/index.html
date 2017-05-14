@@ -13,11 +13,11 @@
 
     <title>
         
-          About - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
+          React - ZhangFengfeng的博客 | ZhangFengfeng&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/about/">
+    <link rel="canonical" href="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/05/14/React的一些记录/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/MyBlog/css/bootstrap.min.css">
@@ -147,181 +147,147 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/MyBlog/img/about-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://github.com/MrZhangFengfeng/MyBlog/MyBlog/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('react.png')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is ZhangFengfeng.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/MyBlog/tags/#React" title="React">React</a>
+                        
+                    </div>
+                    <h1>React</h1>
+                    <h2 class="subheading">React的一些记录，一些坑</h2>
+                    <span class="meta">
+                        Posted by ZhangFengfeng on
+                        2017-05-14
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <blockquote>
-<p>写写代码，玩玩效果，看看设计。<br>世界那么大，多走走多看看。</p>
-</blockquote>
-<p>我是谁？<br>我是上海大学一个小研，不知道怎么的就进了前端这个坑。入坑容易，出坑难。<br>当一个炫酷的页面在手上生成，当一个特效就此搞定，当一个框架一个框架像板砖一样向你的脸上砸来，当一个新技术把前一个新技术拍死在沙滩上。。。我害怕，我激动，我更兴奋。前端这个坑是入了，但是坑里很美妙，很神奇，忍不住继续把坑挖大。<br>行了，不说了，继续挖坑去~~</p>
-<p style="text-align:right;"><br>    —— <a href="javascript:;" target="_blank" rel="external">入坑进行曲</a><br></p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-                <!-- 如果开启评论功能 -->
+                <h3 id="今天来说一下这两天学习React遇到的一些坑吧"><a href="#今天来说一下这两天学习React遇到的一些坑吧" class="headerlink" title="今天来说一下这两天学习React遇到的一些坑吧"></a>今天来说一下这两天学习React遇到的一些坑吧</h3><hr>
+<p>长长的分割线</p>
+<hr>
+<ul>
+<li><p>模块名首字母要大写</p>
+</li>
+<li><p>class在React中是关键字，写类的时候要改为”calssName”，其实class在之前就是保留字。</p>
+</li>
+<li><p>ReactDOM! DOM! DOM! DOM! 这个DOM要大写！</p>
+</li>
+<li><p>onKeyUp.  在这类不仅K要大写，U也要大写。</p>
+</li>
+<li><p>ReactDOM.render的时候里面的模块也只能有一个顶层标签。</p>
+</li>
+<li><p>react中的事件基本都是冒泡到document上然后通过event.target来进行分发的。</p>
+</li>
+<li><p>列表中setState改变列表一个列表元素的props，列表update，整个列表每个元素都会update，性能会很差。解决办法是在每个列表元素的componentshouldupdate里做判断，如果props没变，就不update了。</p>
+</li>
+<li><p>大组件的创建还是比较花时间的，如果是在chrome还好，在微信浏览器速度大概慢十倍，比如一个长列表，在chrome渲染出来花300ms，在微信浏览器就要3s。react的快是说在组件创建出来之后变化的时候，通过diff来减少dom操作，所以快，但是组件的创建到jsx转化到html，还是需要开销的。解决办法就是，我遇到的只有长列表会出现这种情况，长列表可以用react-lazyload。</p>
+</li>
+<li><p>props会默认缓存，可以好好使用</p>
+</li>
+<li><p>不要像这样去修改props， this.props.temp = xxx，要么用getDefaultProps去定义，要么在jsx里赋值，像例子里的写法不友好，应该默认props不可修改</p>
+</li>
+<li><p>不要像这样修改state， this.state.temp = xxx, 应该在 this.setState里去修改。</p>
+</li>
+<li><p>有对数据的操作，如一些业务逻辑，可以放在componentDidMount里，因为它在render之后。</p>
+</li>
+<li><p>尽量细化，微化组件，并且使用组合的方式使用react，可以最大程度发挥它的性能，使用它的diff算法。</p>
+</li>
+</ul>
+<hr>
+<p>又是一条长长的分割线</p>
+<hr>
+<h4 id="今天就这么多。遇到坑继续更新。"><a href="#今天就这么多。遇到坑继续更新。" class="headerlink" title="今天就这么多。遇到坑继续更新。"></a>今天就这么多。遇到坑继续更新。</h4>
+
+                <hr>
+
                 
-                    <hr>
 
+                <ul class="pager">
                     
-
                     
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
+                        <li class="next">
+                            <a href="/MyBlog/2017/05/04/JS中的new到底做了什么/" data-toggle="tooltip" data-placement="top" title="JS中的new到底做了什么">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
 
+                
 
-                    
-
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "hexo-theme-huxblog";
-                        var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/about/index.html";
-                        var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/about/index.html";
-
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
-                        
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
-                    
-
-
-
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
-    <!-- Sidebar Container -->
+    <!-- Side Catalog Container -->
+        
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
                 sidebar-container
-            ">
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/MyBlog/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/MyBlog/tags/#生活" title="生活" rel="2">生活</a>
-                            
-                        
-                            
-                            <a href="/MyBlog/tags/#前端" title="前端" rel="7">前端</a>
-                            
-                        
-                            
-                            <a href="/MyBlog/tags/#知识点" title="知识点" rel="6">知识点</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/MyBlog/tags/#webpack" title="webpack" rel="2">webpack</a>
-                            
-                        
-                            
-                            <a href="/MyBlog/tags/#入坑指南" title="入坑指南" rel="2">入坑指南</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/MyBlog/tags/#React" title="React">React</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/MyBlog/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/MyBlog//img/avatar.jpg" />
-                        
-
-                        
-                            <p>前端是用来玩的!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/Mr张峰峰">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/MrZhangFengfeng">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -348,9 +314,66 @@
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/05/14/React的一些记录/";
+    var disqus_url = "https://github.com/MrZhangFengfeng/MyBlog/MyBlog/2017/05/14/React的一些记录/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
@@ -513,6 +536,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/MyBlog/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
